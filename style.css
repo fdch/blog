@@ -11,7 +11,7 @@ https://coolors.co/363636-242f40-cca43b-e5e5e5-ffffff
 body {
   font-family: Courier;
   font-size: 2.5em;
-  background: #363636;
+  background: #333;
   color: #e5e5e5;
   margin: 0px;
   padding: 0px;
@@ -36,7 +36,7 @@ main {
 header, footer {
   background:#242f40;
   color: #ffffff;
-  padding:40px;
+  padding:20px;
 }
 
 a {
