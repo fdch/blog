@@ -33,10 +33,6 @@ main {
   padding: 20px;
 }
 
-p {
-  font-size: 1.5em;
-}
-
 header, footer {
   background:#242f40;
   color: #ffffff;
