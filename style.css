@@ -1,0 +1,52 @@
+/* 
+Color palette: 
+https://medium.com/swlh/how-i-designed-a-colorblind-friendly-palette-8a91a49f1220
+https://coolors.co/363636-242f40-cca43b-e5e5e5-ffffff
+- 363636 gris oscuro
+- 242f40 azul oscuro
+- cca43b amarillo
+- e5e5e5 gris claro
+- ffffff blanco
+*/
+body {
+  font-family: Courier;
+  font-size: 2.5em;
+  background: #363636;
+  color: #e5e5e5;
+  margin: 0px;
+  padding: 0px;
+}
+
+summary {
+  padding: 0.7em 0em;
+  outline:none
+}
+details[open] summary {
+  border:none
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+  align-items: left;
+  /* height: 80vh; */
+  padding: 20px;
+}
+
+p {
+  font-size: 1.5em;
+}
+
+header, footer {
+  background:#242f40;
+  color: #ffffff;
+  padding:40px;
+}
+
+a {
+  color: #cca43b
+}
+
+nav {
+  list-style: none
+}
