@@ -41,8 +41,10 @@ header, footer {
 
 blockquote {
   font-weight: bold;
-  border: 1pm dashed #cca43b;
+  border: 1px dashed #cca43b;
   background: #363636;
+  padding: 5px;
+  border-radius: 10px;
 }
 
 a {
