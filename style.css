@@ -40,10 +40,11 @@ header, footer {
 }
 
 blockquote {
-  font-weight: bold;
-  border: 1px dashed #cca43b;
+  font-style: italic;
+  font-size: 0.75em;
+  border-left: 2px solid #cca43b;
   background: #363636;
-  padding: 5px;
+  padding: 25px;
   border-radius: 10px;
 }
 
@@ -53,4 +54,20 @@ a {
 
 nav {
   list-style: none;
+}
+
+time {
+  font-size: 0.75em;
+  color: #e5e5e5;
+  align-items: left;
+}
+
+article {
+  max-width: 800px;
+  margin: 0 auto;
+  flex-direction:column;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
 }
