@@ -19,8 +19,9 @@ body {
 
 summary {
   padding: 0.7em 0em;
-  outline:none
+  outline:none;
 }
+
 details[open] summary {
   border:none
 }
