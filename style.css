@@ -47,6 +47,10 @@ blockquote {
   background: #363636;
   padding: 25px;
   border-radius: 10px;
+  margin-top: 0.75em;
+  margin-bottom: 0.75em;
+  margin-left: 20px;
+  margin-right: 20px;
 }
 
 a {
