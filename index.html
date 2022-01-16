@@ -95,9 +95,9 @@
           <p>
             One thing I found out about is the <code>details</code> and <code>summary</code> HTML tags, which made
             collapsing and unfolding possible, and only using html! Fabulous. 🤷🏽‍♂️
-            <details>
-              <summary>Isn't it cool 🙁?</summary>😒
-            </details>
+          <details>
+            <summary>Isn't it cool 🙁?</summary>😒
+          </details>
           </p>
 
           <h3>Step 5: Create an style.css file</h3>
@@ -166,8 +166,8 @@
             other websites I <em>hacked</em> away by copy-pasting the source. That was it for my self-taught
             introduction to
             programming:
-            <blockquote>Skim a tutorial and copy some code to get yours working.</blockquote> And I did not know it as
-            <em>code</em>, it was just a set of instructions. That could not be Programming.
+          <blockquote>Skim a tutorial and copy some code to get yours working.</blockquote> And I did not know it as
+          <em>code</em>, it was just a set of instructions. That could not be Programming.
 
           </p>
           <p>
@@ -256,69 +256,112 @@
 
       </details>
 
-<details><summary>I reverse engineered 🥷 an analog synth 🎛 into an open source VST 💾</summary>
+      <details>
+        <summary>I reverse engineered 🥷 an analog synth 🎛 into an open source VST 💾</summary>
 
-<time> 1/16/2022 1:55:35 </time>
+        <time> 1/16/2022 1:55:35 </time>
 
-<article>
+        <article>
 
-<h2>I reverse engineered 🥷 an analog synth 🎛 into an open source VST 💾</h2>
+          <h2>I reverse engineered 🥷 an analog synth 🎛 into an open source VST 💾</h2>
 
-<blockquote>TL;DR: I made a VST, you can get it here: <a href='https://github.com/fdch/Apollo1'>https://github.com/fdch/Apollo1</a></blockquote>. Note: I’m not making any money from this, it is only intended for educational purposes.
+          <blockquote>TL;DR: I made a VST, you can get it here: <a
+              href='https://github.com/fdch/Apollo1'>https://github.com/fdch/Apollo1</a></blockquote>. Note: I'm not
+          making any money from this, it is only intended for educational purposes.
 
-<h3>The Encounter</h3>
+          <h3>The Encounter</h3>
 
-<p>
-The evening concert was coming to an end in the countryside of a town called Unquillo, not far from Córdoba, Argentina. The last band was an underground, independent, electronic music group that had a very large table completely covered with analog instruments and cables. When they started it was difficult to differentiate between sounds, who was making what, and which instrument was making which sound. Complete dislocation between gesture and sound.  But then, I heard it: <cite>The Apollo</cite>. 
+          <p>
+            The evening concert was coming to an end in the countryside of a town called Unquillo, not far from Córdoba,
+            Argentina. The last band was an underground, independent, electronic music group that had a very large table
+            completely covered with analog instruments and cables. When they started it was difficult to differentiate
+            between sounds, who was making what, and which instrument was making which sound. Complete dislocation
+            between gesture and sound. But then, I heard it: <cite>The Apollo</cite>.
+          </p>
+          <figure><img src='http://www.gsmusic.com.ar/Imagenes/ApolloI/ApolloI.gif' />
+            <figcaption>The Apollo 1 by Guido Salaya</figcaption>
+          </figure>
+          <p>
+          Did not know what it was first, but I was blown away. I waited until the end of the concert, went up and
+          congratulated the group, and asked about the synthesizer. It was hard to hide my bewilderment; my eyes kept
+          looking at it as if it were some treasure from a paradise lost, a forbidden fruit. I had to have it. It had to
+          be mine.
+          </p>
 
-<figure><img src='http://www.gsmusic.com.ar/Imagenes/ApolloI/ApolloI.gif'/><figcaption>The Apollo 1 by Guido Salaya</figcaption></figure>
+          <h3>The Revelation</h3>
 
-Did not know what it was first, but I was blown away. I waited until the end of the concert, went up and congratulated the group, and asked about the synthesizer. It was hard to hide my bewilderment; my eyes kept looking at it as if it were some treasure from a paradise lost, a forbidden fruit. I had to have it. It had to be mine. 
-</p>
+          <p>
+            A few days went by and I just forgot about Apollo. I continued with my work on <a
+              href="https://github.com/fdch/pdpy">pdpy</a>, I forget what I did, and I watched a few movies. So, I'm in
+            the middle of the movie 🎥, Gosling is turning and flipping around trying not to pass out while stabilizing
+            a ship, which will be the Eagle upon it's moon landing, and it hit me: <cite>I will buy the synth</cite>.
+            Spinning out of control, I duck-duck-go'ed <cite>Apollo synth</cite> only to find that it was discontinued.
+            I became frustrated for a second, just enough to glance at the screen while Gosling was making the weirdest
+            face 😵‍💫: <q>I will make it with <a href='http://msp.ucsd.edu'>Pure Data</a></q>. I felt alive.
+          </p>
 
-<h3>The Revelation</h3>
+          <h3>The Research</h3>
 
-<p>
-A few days went by and I just forgot about Apollo. I continued with my work on <a href="https://github.com/fdch/pdpy">pdpy</a>, I forget what I did, and I watched a few movies. So, I’m in the middle of the movie 🎥, Gosling is turning and flipping around trying not to pass out while stabilizing a ship, which will be the Eagle upon it’s moon landing, and it hit me: <cite>I will buy the synth</cite>. Spinning out of control, I duck-duck-go'ed <cite>Apollo synth</cite> only to find that it was discontinued. I became frustrated for a second, just enough to glance at the screen while Gosling was making the weirdest face 😵‍💫: <q>I will make it with <a href='http://msp.ucsd.edu'>Pure Data</a></q>. I felt alive.
-</p>
+          <p>
+            The Apollo 1 <a
+              href='https://www.gsmusic.com.ar/productos/apollo1-en.html'>https://www.gsmusic.com.ar/productos/apollo1-en.html</a>
+            is made by Guido Salaya, an Argentinean independent electronic engineer who designs really incredible analog
+            synthesizers. From his website, it reads:
+          </p>
+          <blockquote> <q>GS Apollo I is an analog monophonic synthesizer featuring subtractive synthesis.</q>
+          </blockquote>
+          <p>
+          Here's a video of Ernesto Romeo giving it a spin: <a
+            href='https://youtu.be/qBSFE7i5L88'>click here</a>. Luckily, su atractivo synthesis is
+          something I'd done in the past. However, I was decided to make it into a VST using Pure Data, so I had to make
+          it suitable for <a
+          href='https://github.com/pierreguillot/Camomile'>Camomile</a>. From then
+          on, this became a learning project where I tackled with VST parameters and the internal logic Pierre Guillot,
+          Camomile's awesome coder, intended. His docs were really helpful with that 👌🏼.
+          </p>
 
-<h3>The Research</h3>
+          <p>
+            In addition to learning how to Camomile, I had to get some information about how the Apollo 1 was built.
+            That is, I needed some diagrams of the electric circuitry involved in it. For this, I looked into the online
+            manual of the Apollo: <a href="https://www.manualslib.es/manual/87669/Gs-Apollo-I.html">GS APOLLO I MANUAL
+              DEL USUARIO Descargar en PDF</a> Now, I was ready to start patching.
+          </p>
 
-<p>
-The Apollo 1 <a href='https://www.gsmusic.com.ar/productos/apollo1-en.html'>https://www.gsmusic.com.ar/productos/apollo1-en.html</a> is made by Guido Salaya, an Argentinean independent electronic engineer who designs really incredible analog synthesizers. From his website, it reads:
+          <h3>The Patch</h3>
 
-<blockquote> <q>GS Apollo I is an analog monophonic synthesizer featuring subtractive synthesis.</q> </blockquote>
+          <p>
+            Apollo1 is an open source Pure Data patch that can run inside a DAW using the Camomile audio plugin by
+            Pierre Guillot. It is a copy of the Apollo 1 Analog Synthesizer by Guido Salaya (GS Music). It is intended
+            for educational purposes.
 
-Here's a video of Ernesto Romeo giving it a spin: <a href='https://youtu.be/qBSFE7i5L88'>https://youtu.be/qBSFE7i5L88</a>. Luckily, su atractivo synthesis is something I’d done in the past. However, I was decided to make it into a VST using Pure Data, so I had to make it suitable for Camomile (<a href='https://github.com/pierreguillot/Camomile'>https://github.com/pierreguillot/Camomile</a>). From then on, this became a learning project where I tackled with VST parameters and the internal logic Pierre Guillot, Camomile’s awesome coder, intended. His docs were really helpful with that 👌🏼. 
-</p>
+          <figure><img src='https://github.com/fdch/Apollo1/raw/df21eef4c01203c5fab62e048a23c918268f8d9d/Apollo1.png' />
+            <figcaption>The Apollo VST</figcaption>
+          </figure>
 
-<p>
-In addition to learning how to Camomile, I had to get some information about how the Apollo 1 was built. That is, I needed some diagrams of the electric circuitry involved in it. For this, I looked into the online manual of the Apollo: <a href="https://www.manualslib.es/manual/87669/Gs-Apollo-I.html">GS APOLLO I MANUAL DEL USUARIO Descargar en PDF</a> Now, I was ready to start patching.
-</p>
+          The DSP design was quite straightforward, keeping it as simple as possible. The main filter was adapted from
+          one made by Cyrille Henri in 2016, and it was <q>based on algorythm by Vesa Valimaki and Antti Huovilaine</q>.
+          Do check CHNRY's work: <a href='http://www.chnry.net/ch/'>http://www.chnry.net/ch/</a>, he's quite amazing.
+          The ADSR logic comes from Pd's doc, no extra magic there. The rest is just joining the dots.
 
-<h3>The Patch</h3>
+          </p>
 
-<p>
-Apollo1 is an open source Pure Data patch that can run inside a DAW using the Camomile audio plugin by Pierre Guillot. It is a copy of the Apollo 1 Analog Synthesizer by Guido Salaya (GS Music). It is intended for educational purposes.
+          <h3>The VST</h3>
 
-<figure><img src='https://github.com/fdch/Apollo1/raw/df21eef4c01203c5fab62e048a23c918268f8d9d/Apollo1.png'/><figcaption>The Apollo VST</figcaption></figure>
+          <p>
+            Making the VST was quite easy because I was using Camomile, which <em>is</em> the VST that loads the Pd
+            patch I made. The audio core of Camomile comes from the embedded version of Pd called <a
+              href='https://github.com/libpd'>libpd</a>. Look into that library if you're interested in knowing how it
+            works. So, making the VST meant changing the patch to which the compiled Camomile VST is pointing. Thus, all
+            I had to do is grab the Camomile releases and replace the patch (and some other stuff, too, read the docs
+            for that).
 
-The DSP design was quite straightforward, keeping it as simple as possible. The main filter was adapted from one made by Cyrille Henri in 2016, and it was <q>based on algorythm by Vesa Valimaki and Antti Huovilaine</q>. Do check CHNRY’s work: <a href='http://www.chnry.net/ch/'>http://www.chnry.net/ch/</a>, he’s quite amazing. The ADSR logic comes from Pd’s doc, no extra magic there. The rest is just joining the dots.
+          </p>
 
-</p>
+          <blockquote>That's that; no magic. Actually, it was quite magical 🧙‍♂️🎹🎛</blockquote>
 
-<h3>The VST</h3>
+        </article>
 
-<p>
-Making the VST was quite easy because I was using Camomile, which <em>is</em> the VST that loads the Pd patch I made. The audio core of Camomile comes from the embedded version of Pd called <a href='https://github.com/libpd'>libpd</a>. Look into that library if you’re interested in knowing how it works. So, making the VST meant changing the patch to which the compiled Camomile VST is pointing. Thus, all I had to do is grab the Camomile releases and replace the patch (and some other stuff, too, read the docs for that).
-
-</p>
-
-<blockquote>That’s that; no magic. Actually, it was quite magical 🧙‍♂️🎹🎛</blockquote>
-
-</article>
-
-</details>
+      </details>
 
 
     </main>
