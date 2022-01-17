@@ -4,8 +4,10 @@ const prefersDarkScheme = window.matchMedia("(prefers-color-scheme: dark)");
 const currentTheme = localStorage.getItem("theme");
 if (currentTheme == "dark") {
   document.body.classList.toggle("dark-theme");
+  btn.innerHTML = "🌝";
 } else if (currentTheme == "light") {
   document.body.classList.toggle("light-theme");
+  btn.innerHTML = "🌚";
 }
 
 btn.addEventListener("click", function () {
@@ -14,15 +16,16 @@ btn.addEventListener("click", function () {
     var theme = document.body.classList.contains("light-theme")
       ? "light"
       : "dark";
-
-    btn.innerHTML = "🌚";
-
-  } else {
-    document.body.classList.toggle("dark-theme");
-    var theme = document.body.classList.contains("dark-theme")
+    } else {
+      document.body.classList.toggle("dark-theme");
+      var theme = document.body.classList.contains("dark-theme")
       ? "dark"
       : "light";
-    btn.innerHTML = "🌝";
   }
   localStorage.setItem("theme", theme);
+  if (theme == "dark") {
+    btn.innerHTML = "🌝";
+  } else if (theme == "light") {
+    btn.innerHTML = "🌚";
+  }
 });
