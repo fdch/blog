@@ -14,11 +14,15 @@ btn.addEventListener("click", function () {
     var theme = document.body.classList.contains("light-theme")
       ? "light"
       : "dark";
+
+    btn.innerHTML = "🌚";
+
   } else {
     document.body.classList.toggle("dark-theme");
     var theme = document.body.classList.contains("dark-theme")
       ? "dark"
       : "light";
+    btn.innerHTML = "🌝";
   }
   localStorage.setItem("theme", theme);
 });
