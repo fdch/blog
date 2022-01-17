@@ -1,11 +1,15 @@
-name: List Posts in the Repo
+name: Update post lists
 on: [push]
 jobs:
-  List-Posts:
+  build:
     runs-on: ubuntu-latest
     steps:
-      - name: Check out repository code
-        uses: actions/checkout@v2
-      - name: List files in the repository
-        run: |
-          ls ${{ github.workspace }}/posts/*.html > posts.txt
+      - uses: actions/checkout@v2
+      - run: |
+          ls ${{ github.workspace }}/posts/*.html > ${{ github.workspace }}/posts.txt
+          git config user.name github-actions
+          git config user.email github-actions@github.com
+          git add .
+          git commit -m "Update posts"
+          git push
+
