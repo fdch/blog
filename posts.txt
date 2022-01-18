@@ -1,0 +1,3 @@
+/home/runner/work/blog/blog/posts/how_did_i_start_to_program.html
+/home/runner/work/blog/blog/posts/i_reverse_engineered_an_analog_synth.html
+/home/runner/work/blog/blog/posts/making_a_blog_with_your_phone.html
