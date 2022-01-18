@@ -5,11 +5,16 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+      - name: setup python
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.9.7 #install the python needed
+      - name: execute py script # run the run.py to get the latest data
+        run: |
+          python update_posts.py
       - run: |
-          ls ${{ github.workspace }}/posts/*.html > ${{ github.workspace }}/posts.txt
           git config user.name github-actions
           git config user.email github-actions@github.com
           git add .
           git commit -m "Update posts"
           git push
-
