@@ -12,7 +12,6 @@ jobs:
       - name: Updating posts
         run: |
           python update_posts.py
-      - name: Commit and Push the new index file
       - run: |
           git config user.name github-actions
           git config user.email github-actions@github.com
