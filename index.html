@@ -40,434 +40,246 @@
       <section id="posts">
     <details id="I-reverse-engineered">
       <summary>I reverse engineered 🥷 an analog synth 🎛 into an open source VST 💾</summary>
-      <a href="posts/i_reverse_engineered_an_analog_synth.html">permalink</a>
       <article>
         
-<time>01-16-2022 1:55:35</time>
+<main>
+<time>01-16-2022 1:55:35 - <a href="posts/i_reverse_engineered_an_analog_synth.html">📄</a></time>
 <h2>I reverse engineered 🥷 an analog synth 🎛 into an open source VST 💾</h2>
-
-    
-<blockquote>TL;DR: I made a VST, you can get it here: 
+<blockquote>TL;DR: I made a VST, you can get it here:
 <a href="https://github.com/fdch/Apollo1">https://github.com/fdch/Apollo1</a>. Note: I'm not
-      making any money from this, it is only intended for educational purposes. </blockquote>
-
-    
+      making any money from this, it is only intended for educational purposes.</blockquote>
 <h3>The Encounter</h3>
-
-    
-<p>
-      The evening concert was coming to an end in the countryside of a town called Unquillo, not far from
+<p>The evening concert was coming to an end in the countryside of a town called Unquillo, not far from
       Córdoba,
-      Argentina. The last band, 
+      Argentina. The last band,
 <a href="https://contrafacto.bandcamp.com/">Contrafacto</a>, was an underground,
       independent, electronic music group that had a very large table
       completely covered with analog instruments and cables. When they started it was difficult to differentiate
       between sounds, who was making what, and which instrument was making which sound. Complete dislocation
-      between gesture and sound. But then, I heard it: 
-<cite>The Apollo</cite>. It 
-<a href="https://www.deezer.com/en/track/1413118422">sounds like this</a>, and looks like the pic below:
-    </p>
-    
+      between gesture and sound. But then, I heard it:
+<cite>The Apollo</cite>. It
+<a href="https://www.deezer.com/en/track/1413118422">sounds like this</a>, and looks like the pic below:</p>
 <figure>
 <img src="http://www.gsmusic.com.ar/Imagenes/ApolloI/ApolloI.gif"></img>
-      
-<figcaption>The Apollo 1 by Guido Salaya</figcaption>
-    </figure>
-    
-<p>
-      Did not know what it was first, but I was blown away. I waited until the end of the concert, went up and
+<figcaption>The Apollo 1 by Guido Salaya</figcaption></figure>
+<p>Did not know what it was first, but I was blown away. I waited until the end of the concert, went up and
       congratulated the group, and asked about the synthesizer. It was hard to hide my bewilderment; my eyes
       kept
       looking at it as if it were some treasure from a paradise lost, a forbidden fruit. I had to have it. It
-      had to be mine.
-    </p>
-
-    
+      had to be mine.</p>
 <h3>The Revelation</h3>
-
-    
-<p>
-      A few days went by and I just forgot about Apollo. I continued with my work on 
+<p>A few days went by and I just forgot about Apollo. I continued with my work on
 <a href="https://github.com/fdch/pdpy">pdpy</a>, I forget what I did, and I watched a few movies. So, I'm
       in
       the middle of the movie 🎥, Gosling is turning and flipping around trying not to pass out while
       stabilizing
-      a ship, which will be the Eagle upon it's moon landing, and it hit me: 
+      a ship, which will be the Eagle upon it's moon landing, and it hit me:
 <cite>I will buy the synth</cite>.
-      Spinning out of control, I duck-duck-go'ed 
-<cite>Apollo synth</cite> only to find that it was
+      Spinning out of control, I duck-duck-go'ed
+<cite>Apollo synth</cite>only to find that it was
       discontinued.
       I became frustrated for a second, just enough to glance at the screen while
-      
-<a href="https://m.youtube.com/watch?v=atBUgwJAD0U&t=02m18s"> Gosling was making the weirdest face</a>
-      😵‍💫: 
-<q>I will make it with 
-<a href="http://msp.ucsd.edu">Pure Data</a></q>. I felt alive.
-    </p>
-
-    
+<a href="https://m.youtube.com/watch?v=atBUgwJAD0U&t=02m18s">Gosling was making the weirdest face</a>😵‍💫:
+<q>I will make it with
+<a href="http://msp.ucsd.edu">Pure Data</a></q>. I felt alive.</p>
 <h3>The Research</h3>
-
-    
 <p>
-      
-<a href="https://www.gsmusic.com.ar/productos/apollo1-en.html"> The Apollo 1 </a> is made by Guido Salaya,
+<a href="https://www.gsmusic.com.ar/productos/apollo1-en.html">The Apollo 1</a>is made by Guido Salaya,
       an Argentinean independent electronic engineer who designs really incredible analog
-      synthesizers. From his website, it reads:
-    </p>
-    
-<blockquote> 
-<q>GS Apollo I is an analog monophonic synthesizer featuring subtractive synthesis.</q>
-    </blockquote>
-    
-<p>
-      Here's 
-<a href="https://youtu.be/qBSFE7i5L88"> a video of Ernesto Romeo </a> giving it a spin. Luckily,
+      synthesizers. From his website, it reads:</p>
+<blockquote>
+<q>GS Apollo I is an analog monophonic synthesizer featuring subtractive synthesis.</q></blockquote>
+<p>Here's
+<a href="https://youtu.be/qBSFE7i5L88">a video of Ernesto Romeo</a>giving it a spin. Luckily,
       subtractive synthesis is something I'd done in the past. However, I was decided to make it into a VST
-      using Pure Data, so I had to make it suitable for 
+      using Pure Data, so I had to make it suitable for
 <a href="https://github.com/pierreguillot/Camomile">Camomile</a>. From then on, this became a learning
       project where I tackled with VST parameters and the internal logic Pierre Guillot, Camomile's awesome
-      coder, had intended. His docs were really helpful with that 👌🏼.
-    </p>
-
-    
-<p>
-      In addition to learning how to Camomile, I had to get some information about how the Apollo 1 was built.
+      coder, had intended. His docs were really helpful with that 👌🏼.</p>
+<p>In addition to learning how to Camomile, I had to get some information about how the Apollo 1 was built.
       That is, I needed some diagrams of the electric circuitry involved in it. For this, I looked into the
-      online manual of the Apollo: 
+      online manual of the Apollo:
 <a href="https://www.manualslib.es/manual/87669/Gs-Apollo-I.html">GS APOLLO I
-        MANUAL DEL USUARIO Descargar en PDF</a> Now, I was ready to start patching.
-    </p>
-
-    
+        MANUAL DEL USUARIO Descargar en PDF</a>Now, I was ready to start patching.</p>
 <h3>The Patch</h3>
-
-    
-<p>
-      Apollo1 is an open source Pure Data patch that can run inside a DAW using the Camomile audio plugin by
+<p>Apollo1 is an open source Pure Data patch that can run inside a DAW using the Camomile audio plugin by
       Pierre Guillot. It is a copy of the Apollo 1 Analog Synthesizer by Guido Salaya (GS Music). It is intended
-      for educational purposes.
-    </p>
-    
+      for educational purposes.</p>
 <figure>
-      
 <img src="https://github.com/fdch/Apollo1/raw/df21eef4c01203c5fab62e048a23c918268f8d9d/Apollo1.png"></img>
-      
-<figcaption>The Apollo VST</figcaption>
-    </figure>
-    
-<p>
-      The DSP design was quite straightforward, keeping it as simple as possible. The ADSR logic comes from Pd's
+<figcaption>The Apollo VST</figcaption></figure>
+<p>The DSP design was quite straightforward, keeping it as simple as possible. The ADSR logic comes from Pd's
       doc, no extra magic there. The rest is just joining the dots. The main filter was adapted from one made by
-      Cyrille Henri in 2016, and it was 
+      Cyrille Henri in 2016, and it was
 <q>based on algorythm by Vesa Valimaki and Antti Huovilaine</q>.
-
-    
-<blockquote>Do check CHNRY's work: 
+<blockquote>Do check CHNRY's work:
 <a href="http://www.chnry.net/ch/">http://www.chnry.net/ch/</a>, he's
-      quite amazing.</blockquote>
-
-    </p>
-
-    
+      quite amazing.</blockquote></p>
 <h3>The VST</h3>
-
-    
-<p>
-      Making the VST was quite easy because I was using Camomile, which 
-<em>is</em> the VST that loads the Pd
-      patch I made. The audio core of Camomile comes from the embedded version of Pd called 
+<p>Making the VST was quite easy because I was using Camomile, which
+<em>is</em>the VST that loads the Pd
+      patch I made. The audio core of Camomile comes from the embedded version of Pd called
 <a href="https://github.com/libpd">libpd</a>. Look into that library if you're interested in knowing how it
       works. So, making the VST meant changing the patch to which the compiled Camomile VST is pointing. Thus,
       all I had to do is grab the Camomile releases and replace the patch (and some other stuff, too, read the
-      docs for that).
-    </p>
-
-    
-<blockquote>
-      That's that; no magic. Actually, it was quite magical 🧙‍♂️🎹🎛
-    </blockquote>
-  
+      docs for that).</p>
+<blockquote>That's that; no magic. Actually, it was quite magical 🧙‍♂️🎹🎛</blockquote>
       </article>
     </details>
      
     <details id="How-did-I-start-to-p">
       <summary>How did I start to program?</summary>
-      <a href="posts/how_did_i_start_to_program.html">permalink</a>
       <article>
         
-<time>01-15-2022 1:30:00</time>
+<main>
+<time>01-15-2022 1:30:00 - <a href="posts/how_did_i_start_to_program.html">📄</a></time>
 <h2>How did I start to program?</h2>
-
-    
-<p>
-      Trying to recall my first program proves way harder a task than I could anticipate. Partly, because my
-      memory has been giving me headaches as it gets more and more difficult to remember stuff that happened
-      long
-      ago 😣
-    </p>
-    
-<blockquote>
-      about 15 years, though, I'm not that old.
-    </blockquote>
-    
+<p>Trying to recall my first program proves way harder a task than I could anticipate. Partly, because my
+        memory has been giving me headaches as it gets more and more difficult to remember stuff that happened
+        long
+        ago 😣</p>
+<blockquote>about 15 years, though, I'm not that old.</blockquote>
 <p>Added to this tendency towards oblivion, I did not know I was programming at first. I began writing basic
-      HTML, single-page websites. No styling, just layout, and a few basic PHP snippets of code that I managed
-      to
-      copy-paste from one or two tutorials I did not read through. What is more, those HTML pages were copies of
-      other websites I 
-<em>hacked</em> away by copy-pasting the source. That was it for my self-taught
-      introduction to
-      programming:
-    
-<blockquote>Skim a tutorial and copy some code to get yours working.</blockquote> And I did not know it as
-    
-<em>code</em>, it was just a set of instructions. That could not be Programming.
-
-    </p>
-    
-<p>
-      Needless to say, making websites was something I started doing on my own time, usually at night, while
-      getting to know the endless depths of that web word wide. That abyss, and insomnia, I'm not sure which
-      came
-      first, channelled through a need to understand hypertext, or at least how to use it. The browser was my
-      entry point to programming.
-
-    </p>
-    
-<p>
-      Those websites, though, were mostly for myself and the people very close to me. As I grew more confident,
-      I
-      remember a thrill and excitement when saying, in meetings: 
-<q>I can do the website if we need one;</q>
-      feelings that usually came along with a frightening thought that people will find out I knew nothing of
-      web
-      development. And that was the word, 
-<i>development</i>, that I was so scared of: 
+        HTML, single-page websites. No styling, just layout, and a few basic PHP snippets of code that I managed
+        to
+        copy-paste from one or two tutorials I did not read through. What is more, those HTML pages were copies of
+        other websites I
+<em>hacked</em>away by copy-pasting the source. That was it for my self-taught
+        introduction to
+        programming:
+<blockquote>Skim a tutorial and copy some code to get yours working.</blockquote>And I did not know it as
+<em>code</em>, it was just a set of instructions. That could not be Programming.</p>
+<p>Needless to say, making websites was something I started doing on my own time, usually at night, while
+        getting to know the endless depths of that web word wide. That abyss, and insomnia, I'm not sure which
+        came
+        first, channelled through a need to understand hypertext, or at least how to use it. The browser was my
+        entry point to programming.</p>
+<p>Those websites, though, were mostly for myself and the people very close to me. As I grew more confident,
+        I
+        remember a thrill and excitement when saying, in meetings:
+<q>I can do the website if we need one;</q>feelings that usually came along with a frightening thought that people will find out I knew nothing of
+        web
+        development. And that was the word,
+<i>development</i>, that I was so scared of:
 <q>Noo, I am not a
-        developer. No way. I just know some HTML…</q> I had no idea what being a developer was. I still don't.
-
-    </p>
-    
-<p>
-      By then, I realized CSS was something you needed in order to wash out that horrible HTML. But, it was
-      strange opening those curly braces, and it was even stranger to do this on a different file (with a
-      different extension, 😱).
-    </p>
-    
-<blockquote>
-      I was certainly in uncharted territories. No way I could keep track of things, let alone 
+          developer. No way. I just know some HTML…</q>I had no idea what being a developer was. I still don't.</p>
+<p>By then, I realized CSS was something you needed in order to wash out that horrible HTML. But, it was
+        strange opening those curly braces, and it was even stranger to do this on a different file (with a
+        different extension, 😱).</p>
+<blockquote>I was certainly in uncharted territories. No way I could keep track of things, let alone
 <q>center a
-        div</q>.
-    </blockquote>
-    
-<p>
-      Trial and error, tinkering, tweaking values, searching for answers in incoherent blobs of instructions,
-      not
-      getting it. 😙 Those were the times, the good old times. I did not know what a console was. Ah, those
-      mysterious endless hours of incomprehensible magic, sorceries of the source. Then, in a fog of
-      incalculable
-      depth, I stumbled across some scripture, or some piece of text instructions that went into a script tag
-      that
-      made things on the screen do other things, move around, change. Websites became alive, dynamic,
-      interactive.
-      Ah, such wonders of the script. I panicked. Stopped doing websites because I was not doing them right. I
-      needed to learn JavaScript but I did not know how.
-      Dale
-    </p>
-    
-<p>
-      At that point, it was when I realized that different languages serve different purposes. HTML was meant to
-      structure text on a page; CSS, to stylize the elements of that structure; JavaScript, to make magic 🤔. I
-      also realized that all my knowledge of these languages depended on browsers. That is to say, the power of
-      those languages was limited to what the browser could do.
-
-    </p>
-    
-<p>
-      When I began to realize that I needed to work outside the browser, I delved into Pure Data, a graphical
-      programming environment for music and the arts. Pd is written in C and it changed my life. I could draw
-      connections between objects (ie., I patched stuff) that would result in combinations of notes, generation
-      of
-      a sound, automated control of an audio or visual effect, and much more. I was handed so much potential for
-      multimedia, interaction, and expression that working with Pd became my favorite thing in the world. I was
-      no
-      longer HTML-ing in the depths of night, though I most often patched heavily into daybreak. I was patching
-      during the day, while waiting, on the subway, bus, airports, bars. Basically, every moment of the day was
-      a
-      chance to learn more.
-    </p>
-    
+          div</q>.</blockquote>
+<p>Trial and error, tinkering, tweaking values, searching for answers in incoherent blobs of instructions,
+        not
+        getting it. 😙 Those were the times, the good old times. I did not know what a console was. Ah, those
+        mysterious endless hours of incomprehensible magic, sorceries of the source. Then, in a fog of
+        incalculable
+        depth, I stumbled across some scripture, or some piece of text instructions that went into a script tag
+        that
+        made things on the screen do other things, move around, change. Websites became alive, dynamic,
+        interactive.
+        Ah, such wonders of the script. I panicked. Stopped doing websites because I was not doing them right. I
+        needed to learn JavaScript but I did not know how.
+        Dale</p>
+<p>At that point, it was when I realized that different languages serve different purposes. HTML was meant to
+        structure text on a page; CSS, to stylize the elements of that structure; JavaScript, to make magic 🤔. I
+        also realized that all my knowledge of these languages depended on browsers. That is to say, the power of
+        those languages was limited to what the browser could do.</p>
+<p>When I began to realize that I needed to work outside the browser, I delved into Pure Data, a graphical
+        programming environment for music and the arts. Pd is written in C and it changed my life. I could draw
+        connections between objects (ie., I patched stuff) that would result in combinations of notes, generation
+        of
+        a sound, automated control of an audio or visual effect, and much more. I was handed so much potential for
+        multimedia, interaction, and expression that working with Pd became my favorite thing in the world. I was
+        no
+        longer HTML-ing in the depths of night, though I most often patched heavily into daybreak. I was patching
+        during the day, while waiting, on the subway, bus, airports, bars. Basically, every moment of the day was
+        a
+        chance to learn more.</p>
 <p>I did this patching thing for a year or two, until suddenly my advisor showed me not how to patch an
-      object,
-      but how to make an object. He called them 
+        object,
+        but how to make an object. He called them
 <em>externals</em>. I did not quite get what he could possibly
-      mean. I
-      realized then that I was taking software for granted. All my life, I did not know you could make stuff.
-      So,
-      he opened up a text editor, wrote some stuff in the C language, and inputted some words on a terminal
-      console. The result was astonishing: a new object, the one he'd just created, was there, ready to be
-      connected to other objects. What is an object? I had no idea. I just used them. And now I would make them.
-      My advisor lent me a copy of 
-<cite>The C Programming Language</cite>, and I went home in awe.
-    </p>
-    
+        mean. I
+        realized then that I was taking software for granted. All my life, I did not know you could make stuff.
+        So,
+        he opened up a text editor, wrote some stuff in the C language, and inputted some words on a terminal
+        console. The result was astonishing: a new object, the one he'd just created, was there, ready to be
+        connected to other objects. What is an object? I had no idea. I just used them. And now I would make them.
+        My advisor lent me a copy of
+<cite>The C Programming Language</cite>, and I went home in awe.</p>
 <figure>
-      
 <img src="https://upload.wikimedia.org/wikipedia/commons/0/0e/The_C_Programming_Language%2C_First_Edition_Cover.svg"></img>
-      
-<figcaption>The C Programming Language. I read the ANSI-C version, though, waaay fancier 😉.</figcaption>
-    </figure>
-    
+<figcaption>The C Programming Language. I read the ANSI-C version, though, waaay fancier 😉.</figcaption></figure>
 <p>From then on, I never looked at Pd, JavaScript, or any other programming language the same as before. I
-      could learn anything, from Python to C#, from awk to C++, from bash to React. And that did not stop there,
-      no. Any software was easy to grasp, any operating system.
-    </p>
-    
+        could learn anything, from Python to C#, from awk to C++, from bash to React. And that did not stop there,
+        no. Any software was easy to grasp, any operating system.</p>
 <p>In sum, I cannot remember exactly when I started to program, but I do remember an obsession that grew hand
-      in hand with my fascination of the Internet, computers, and code.
-    </p>
-  
+        in hand with my fascination of the Internet, computers, and code.</p>
       </article>
     </details>
      
     <details id="Making-a-blog-with-y">
       <summary>Making a blog with your 📱</summary>
-      <a href="posts/making_a_blog_with_your_phone.html">permalink</a>
       <article>
         
-<time>01-14-2022 18:00:00</time>
+<main>
+<time>01-14-2022 18:00:00 - <a href="posts/making_a_blog_with_your_phone.html">📄</a></time>
 <h2>Making a blog with your 📱</h2>
-    
-<p>
-      Today, I decided to make a blog with my phone and a Github account.
-      Here are the steps that I took to achieve this.
-    </p>
-
-    
+<p>Today, I decided to make a blog with my phone and a Github account.
+      Here are the steps that I took to achieve this.</p>
 <h3>Step 1: Design a super cool front end 😎</h3>
-    
-<blockquote>
-      This is absolutely necessary so as to get all your ideas in order, and to Make things exactly as you want
-      them rather quickly.
-    </blockquote>
-
-    
-<p>
-      Here is the result:
-    </p>
-
-    
+<blockquote>This is absolutely necessary so as to get all your ideas in order, and to Make things exactly as you want
+      them rather quickly.</blockquote>
+<p>Here is the result:</p>
 <figure>
-      
-<img src="images/0F60B253-A7DB-485C-986A-340A44BAAB85.jpeg"></img>
-      
-<figcaption>Designing a cool front end in pen and paper</figcaption>
-    </figure>
-
-
-    
+<img src="./images/0F60B253-A7DB-485C-986A-340A44BAAB85.jpeg"></img>
+<figcaption>Designing a cool front end in pen and paper</figcaption></figure>
 <h3>Step 2: Make a new repository on Github</h3>
-    
-<blockquote>
-      Using the web interface: Add a Readme if you want to.
-    </blockquote>
-
-    
-<p>
-      You also need to enable Github Pages on it. Head to 
-<a href="https://pages.github.com">https://pages.github.com/</a> to know how to do so.
-    </p>
-
-    
+<blockquote>Using the web interface: Add a Readme if you want to.</blockquote>
+<p>You also need to enable Github Pages on it. Head to
+<a href="https://pages.github.com">https://pages.github.com/</a>to know how to do so.</p>
 <h3>Step 3: Simplify</h3>
-    
-<blockquote>
-      Scratch out everything you don't need
-    </blockquote>
-
-
-    
-<p>
-      In my case, once the design was layed out, I went ahead and scratched out
+<blockquote>Scratch out everything you don't need</blockquote>
+<p>In my case, once the design was layed out, I went ahead and scratched out
       Everything that I thought unnecessary. Hence, there was a lot of stuff like:
-      Don't use (json, JavaScript, markdown, etc) and a ✅ for 
-<em>plain HTML</em>.
-    </p>
-
-
-    
-<h3>Step 4: Create an index.html file (the one you are reading now) </h3>
-    
+      Don't use (json, JavaScript, markdown, etc) and a ✅ for
+<em>plain HTML</em>.</p>
+<h3>Step 4: Create an index.html file (the one you are reading now)</h3>
 <blockquote>This file is the only page you live edit, while readers view it (🤦🏽)</blockquote>
-
-    
-<p>
-      This is not that bad, and it is quite thrilling. On one hand, my mistakes are exposed immediately, and
+<p>This is not that bad, and it is quite thrilling. On one hand, my mistakes are exposed immediately, and
       reading a messy blog is not nice. However, this makes me think really hard about content and layout. I
       must
       have a very clear idea 💡 about what to write and how to write it first, so then I can type it out and
       place
-      the cumbersome html tags to display it in a readable way... 
-<i>ok, this is questionable, 
-<s>sue me</s></i>
-    </p>
-
-    
-<p>
-      One thing I found out about is the 
-<code>details</code> and 
-<code>summary</code> HTML tags, which made
+      the cumbersome html tags to display it in a readable way...
+<i>ok, this is questionable,
+<s>sue me</s></i></p>
+<p>One thing I found out about is the
+<code>details</code>and
+<code>summary</code>HTML tags, which made
       collapsing and unfolding possible, and only using html! Fabulous. 🤷🏽‍♂️
-    
 <details>
-      
-<summary>Isn't it cool 🙁?</summary>😒
-    </details>
-    </p>
-
-    
+<summary>Isn't it cool 🙁?</summary>😒</details></p>
 <h3>Step 5: Create an style.css file</h3>
-    
-<blockquote>At his point your blog looks amazing, well done 👍🏼 </blockquote>
-
-
-    
-<p>For the style, I went with a 
+<blockquote>At his point your blog looks amazing, well done 👍🏼</blockquote>
+<p>For the style, I went with a
 <a href="https://medium.com/swlh/how-i-designed-a-colorblind-friendly-palette-8a91a49f1220">colorblind safe
-        palette</a> 🎨, used in dark mode,
+        palette</a>🎨, used in dark mode,
       And I might change the feel eventually. For now, I just wanted something quickly to get it out there.</p>
-
-
-    
-<h3>Step 6: Make a first post </h3>
-    
+<h3>Step 6: Make a first post</h3>
 <blockquote>And here it is. Well, the second one ☝️, the first
       One is just a blab about what this blog is. This one is cooler, it has a picture and all.</blockquote>
-
-
-    
 <p>I really liked the picture trick there. I just 📸, upload one to Github as a file. Then I copy the path,
-      Come here, and paste it in the 
-<code>src</code> field of the img tag and voilà, I'm the New York Post</p>
-
-    
+      Come here, and paste it in the
+<code>src</code>field of the img tag and voilà, I'm the New York Post</p>
 <figure>
-      
-<img src="images/8349BFF4-D311-442E-85CF-532047D3634A.jpeg"></img>
-      
-<figcaption>This is a lighthouse in a landlocked city. A useless lighthouse.</figcaption>
-    </figure>
-
-    
+<img src="./images/8349BFF4-D311-442E-85CF-532047D3634A.jpeg"></img>
+<figcaption>This is a lighthouse in a landlocked city. A useless lighthouse.</figcaption></figure>
 <blockquote>That's it! I now have a blog.
-      
-<br>
-      What's fun is that there is: No js ☹️, no php 🥲, no frameworks 😅;
+<br>What's fun is that there is: No js ☹️, no php 🥲, no frameworks 😅;
       It took less than 2 hs to get it running and write this post 🤩.
-      Now it's just a matter of continuing it... 🙃
-    </blockquote>
-  
+      Now it's just a matter of continuing it... 🙃</blockquote>
       </article>
     </details>
     </section>
@@ -475,7 +287,11 @@
     </main>
     <hr>
     <footer>
-      If you'd like to contact me, please email me at fdch@nyu.edu
+      If you'd like to contact me, please email me at fdch@nyu.edu.
+      <br>
+      Last updated: <time datetime="2022-01-18T13:12:24.272257">on January 18, 2022 at 13:12</time>
+      <br>
+      Copyleft <span style="transform: rotate(180deg);">©</span>
     </footer>
     <script src="js/button.js"></script>
   </body>

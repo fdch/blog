@@ -1,20 +1,21 @@
-name: Update post lists
+name: Auto-update posts
 on: [push]
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - name: setup python
+      - name: Setting up python
         uses: actions/setup-python@v2
         with:
-          python-version: 3.9.7 #install the python needed
-      - name: execute py script # run the run.py to get the latest data
+          python-version: 3.9.7
+      - name: Updating posts
         run: |
           python update_posts.py
+      - name: Commit and Push the new index file
       - run: |
           git config user.name github-actions
           git config user.email github-actions@github.com
           git add .
-          git commit -m "Update posts"
+          git commit -m "Auto-Update posts"
           git push

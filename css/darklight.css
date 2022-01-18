@@ -1,4 +1,17 @@
 
+footer {
+  font-size: 0.75em;
+  text-align:center;
+}
+
+summary {
+  outline:none;
+}
+
+details[open] summary {
+  border:none
+}
+
 body {
   font-size: 1.5em;
   --text-color: #222;
@@ -12,6 +25,7 @@ body.dark-theme {
   --anchor-color: #cca43b;
 }
 
+
 @media (prefers-color-scheme: dark) {
   
   /* defaults to dark theme */
@@ -19,12 +33,14 @@ body.dark-theme {
     --text-color: #eee;
     --anchor-color: #cca43b;
     --bkg-color: #121212;
+    --filter: brightness(0) invert(1);
   }
   
   body.light-theme {
     --anchor-color: #0000ff;
     --text-color: #222;
     --bkg-color: #fff;
+    --filter: None;
   }
 }
 
@@ -36,6 +52,12 @@ body {
 
 a {
   color: var(--anchor-color);
+}
+
+a::after {
+  content: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAQElEQVR42qXKwQkAIAxDUUdxtO6/RBQkQZvSi8I/pL4BoGw/XPkh4XigPmsUgh0626AjRsgxHTkUThsG2T/sIlzdTsp52kSS1wAAAABJRU5ErkJggg==);
+  margin: 0 3px 0 5px;
+  filter: var(--filter); 
 }
 
 

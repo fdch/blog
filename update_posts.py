@@ -1,7 +1,7 @@
 import re
 import glob
 from html.parser import HTMLParser
-from datetime import datetime
+from datetime import datetime, date
 
 def deEmojify(text):
     """ Remove emojis and other non-safe characters from string
@@ -18,16 +18,21 @@ def deEmojify(text):
 class DelPost(HTMLParser):
   def __init__(self):
     super().__init__()
-    self.out = '<!DOCTYPE html>' # Start with a doctype
+    # Start with a doctype
+    self.out = f"<!DOCTYPE html>"
     # tag to look for 
     self.tag = 'section' 
     self.attr = ('id', 'posts') 
     self.in_posts = False # are we in the posts section?
+    self.in_footer = False # are we in the footer section?
+    self.last_tag = '' # last tag we saw
 
   def expand_attrs(self, attrs):
     """ Expand attrs back to html string """
     if attrs:
-      attrs = list(map(lambda x:f"{x[0]}=\"{x[1]}\"", attrs))
+      def redir(string):
+        return str(string).replace('../','./') if str(string).startswith('../') else string
+      attrs = list(map(lambda x:f"{x[0]}=\"{redir(x[1])}\"", attrs))
       return " " + " ".join(attrs)
     else:
       return ''
@@ -52,8 +57,19 @@ class DelPost(HTMLParser):
   def handle_starttag(self, tag, attrs):
     if self.in_posts:
       return
+    
+    self.last_tag = tag
+    
+    if tag == 'footer':
+      self.in_footer = True
+    
+    if self.in_footer and tag == 'time':
+      return
+    
     self.copy_start(tag, attrs)
     self.is_in_tag(tag, attrs)
+    
+    
 
   def handle_endtag(self, tag):
     if self.in_posts:
@@ -61,10 +77,19 @@ class DelPost(HTMLParser):
         self.in_posts = False
         self.copy_end(self.tag)
       return
+    if self.in_footer:
+      self.in_footer = False
+      if tag == 'time':
+        return
     self.copy_end(tag)
   
   def handle_data(self, data):
     if self.in_posts:
+      return
+    if self.in_footer and self.last_tag == 'time':
+      timestamp = datetime.now()
+      now = f"{timestamp:on %B %d, %Y at %H:%M}"
+      self.out += f"<time datetime=\"{timestamp.isoformat()}\">{now}</time>"
       return
     self.out += data
   
@@ -77,7 +102,7 @@ class FillPost(DelPost):
   def __init__(self, new_data=None):
     super().__init__()
     self.new_data = new_data
-    self.last_tag = ''
+
 
   def handle_starttag(self, tag, attrs):
     self.copy_start(tag, attrs)
@@ -98,12 +123,13 @@ class FillPost(DelPost):
 class FormatPost(DelPost):
   def __init__(self, url, max_id=20):
     super().__init__()
+    self.in_main = False
     self.in_title = False
     self.in_time = False
     self.title = ''
     self.out = ''
     self.nodata = True
-    self.ignore = ('html', 'head', 'body', 'meta', 'title')
+    self.ignore = ('html', 'head', 'body', 'meta', 'title', 'link')
     self.post_id = ''
     self.max_id = max_id # characters of the <details> id field
     self.url = url # the permalink url
@@ -117,9 +143,17 @@ class FormatPost(DelPost):
       return d
 
   def handle_starttag(self, tag, attrs):
-    self.nodata = tag in self.ignore
-    if self.nodata: 
+
+    if tag == 'main':
+      self.in_main = True
+
+    if tag == 'time':
+      self.in_time = True
+    
+    if not self.in_main: 
       return
+
+
     # converts h1 to h2
     self.in_title = tag == 'h1'
     self.out += f"\n<h2" if self.in_title else f"\n<{tag}"
@@ -128,12 +162,17 @@ class FormatPost(DelPost):
     # populate attributes
     self.out += self.expand_attrs(attrs)
     self.out += ">"
+
   
   def handle_endtag(self, tag):
-    self.in_time = tag == 'time'
-    self.nodata = tag in self.ignore
-    if self.nodata:
+    if tag == 'main':
+      self.in_main = False
+
+    if not self.in_main:
       return
+    
+    if tag == 'time':
+      self.in_time = False
     
     if self.in_title and tag == "h1":
       self.copy_end('h2')
@@ -142,7 +181,7 @@ class FormatPost(DelPost):
       self.copy_end(tag)
     
   def handle_data(self, data):
-    if self.nodata:
+    if not self.in_main:
       return
     if self.in_title:
       self.title += data
@@ -150,17 +189,18 @@ class FormatPost(DelPost):
     # format date 01/14/2022 18:00:00 to timestamp
     if self.in_time: 
       data = data.replace('\n', '').strip() # remove newline from data
-      if data != '':
-        self.timestamp = datetime.strptime(data, "%m-%d-%Y %H:%M:%S")
+      self.timestamp = datetime.strptime(data, "%m-%d-%Y %H:%M:%S")
+      data += f" - <a href=\"{self.url}\">📄</a>"
+      if self.last_tag == 'a':
+        return
     # fill it with the content
-    self.out += data
+    self.out += data.strip()
 
   def wrap(self):
     """returns the wrapped html post"""
     return f"""
     <details id="{self.post_id}">
       <summary>{self.title}</summary>
-      <a href="{self.url}">permalink</a>
       <article>
         {self.out}
       </article>
