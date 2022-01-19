@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset="UTF-8">
+    <title> Testing network limits with collaborative music 🌿🎼🎹 </title>
+    <meta name="description" content="Performers connect remotely from mobile devices 🤳or computers 💻 , controlling sounds 🔊 from the same music piece they are listening to. ">
+    <meta name="keywords" content="network, music, collaborative, composition">
+    <meta name="author" content="Fede Camara Halac">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../css/darklight.css">
+  </head>
+
+  <body>
+      <nav>
+        <button class="back">⏮</button>
+        <button class="btn-toggle">🌝</button>
+      </nav>
+      <main>
+
+<time datetime='2022-01-19 03:26:51'>2022/01/19 03:26:51</time>
+
+<h1>Testing network limits with collaborative music 🌿🎼🎹</h1>
+
+<p>
+
+The pandemic year 😷 was hard on all of us. Lockdowns and travel restrictions have not only affected our own music classes and artistic research, but also profoundly changed music performance all over the world. The problem was that musicians could not meet in the same room to play music with each other. But, one thing was clear: music needed to be made. So, musical performance had to be moved to the network. The result of this was proliferation of software for networked music.
+
+</p>
+
+<p>
+
+While networked performance —somewhen called <q>telematic performance</q>— has been around for at least 10 years, it was not until very recently that the audio dev community turned its attention to facilitating new tools for performers to play music together over home Internet connections. I like to think of this move to the network as a media replacement: from air (the preferred medium of musical sound) to electronic (networked music performance media) 
+🗣 ➡️ 🎤↗️🌎🌍🌏↘️ 🎧 ➡️ 👂
+
+</p>
+
+<p>
+
+Networks became a new performative space. We have a new opportunity to rethink music and music performance research. For example, we can think of an explosion of networked music performance, with its counterpart being an implosion of sound into the electronic medium. The limits of what we can do in the midst of this huge bang of networked media need to be explored.
+
+</p>
+
+<h3>1002: A Case Study 📚 🤖</h3>
+
+<p>
+
+<q>1002</q> is a case study of a collaborative networked performance created using a custom software called <a href='https://github.com/fdch/collidepd' title='CollidePd'>CollidePd</a>. The work is meant to be streamed live on a web page that <b>turns the listener into a performer</b>. On this website, performers connect remotely from mobile devices 🤳or computers 💻 , controlling sounds 🔊 from the same music piece they are listening to. In this way, <q>1002</q> is an invitation to <em>anonymous</em> collaboration in real time with remote performers, without any required musical training 🤯.
+
+</p>
+
+
+<blockquote>The sonic research of this performance is based on the sonification of the musical gesture mediated by the mobile device, emphasizing the participatory movement of the performers.</blockquote>
+
+<h3>The tech</h3>
+
+<p>
+
+The platform is based on a client-server architecture, with a server written in node.js hosted in heroku and two types of clients, one for web written in javascript and another, local, written in node.js. 
+
+</p>
+
+<p>Here's a diagram</p>
+
+<figure><img src='../images/66ED0BFD-BD8C-443A-97D4-ED795C7BE66F.jpeg'/><figcaption>A diagram for the client-server architecture in CollidePd</figcaption></figure>
+
+<p>
+
+The local clients are two, each receiving and sonifying with Pure Data or Supercollider as sound engines the data stream from up to 1000 web clients. In this way, web participants choose whether or not to play the same work they are listening to, making this a collaborative and anonymous performance. 
+
+<blockquote>Note that these two local clients are optional. The real activity happens online.</blockquote>
+
+</p>
+
+<h3>The visuals</h3>
+
+<p>
+
+On the web page there is a visualization of the movement made with the mobile device using yet a separate client that grabs all data from players. 
+
+</p>
+
+<blockquote>To be continued… (I’m tired and I’ll go to sleep 😴)</blockquote>
+
+    </main>
+    <script src="../js/button.js"></script>
+  </body>
+</html>
