@@ -46,35 +46,47 @@
 <time datetime="2022-01-20 04:24:10">01-20-2022 04:24:10 - <a href="posts/adding_github_actions.html">📄</a></time>
 <h2>Adding Github Actions to this blog</h2>
 <p>I went ahead and relaxed a bit with my blog restrictions. In particular, the
-<q>No JavaScript</q>one. We like JS. However, I was not going to do the whole JSON databasing shebang, fetching, caching, etc…,
+<q>No JavaScript</q>one. We like
+        JS. However, I was not going to do the whole JSON databasing shebang, fetching, caching, etc…,
 <a href="https://github.com/fdch/fdch.github.io" title="like I did before">like I did before</a>.</p>
-<blockquote>I wanted something simpler. I’d heard about Github actions, but always wanted to try. So here’s what I did.</blockquote>
+<blockquote>I wanted something simpler. I’d heard about Github actions, but always wanted to try. So here’s what
+        I did.</blockquote>
 <h3>Tinker with a workflow</h3>
-<p>I added a posts subdirectory in which I place every post I make for this blog. From that directory, I want Github Actions to pick up all posts and stack them up into the main index file, in reversed chronological order. Every time a new post is added, I need the index file to be updated. Therefore, this needs to happen on every push. It boils down to:</p>
+<p>I added a posts subdirectory in which I place every post I make for this blog. From that directory, I want
+        Github Actions to pick up all posts and stack them up into the main index file, in reversed chronological order.
+        Every time a new post is added, I need the index file to be updated. Therefore, this needs to happen on every
+        push. It boils down to:</p>
 <ol>
 <li>Create a directory for your posts</li>
 <li>Create a function that updates the index file with the new posts</li>
 <li>Execute the update function on every new post</li></ol>
-<p>The first point speaks for itself: put new posts in their own html files and in one subdirectory. Now, for point 2, the
-<em>function</em>can be written in quite any language. I chose to do this on python, because why not delve into the rawness of
+<p>The first point speaks for itself: put new posts in their own html files and in one subdirectory. Now, for
+        point 2, the
+<em>function</em>can be written in quite any language. I chose to do this on python, because why
+        not delve into the rawness of
 <a href="https://docs.python.org/3/library/html.parser.html" title="that html.parser">that html.parser</a>.</p>
 <p>Anyway, after a few hours and a few classes later, the
-<code>update_posts.py</code>function was finished. It boiled down to three steps:
+<code>update_posts.py</code>function was finished. It
+        boiled down to three steps:
 <ol>
 <li>Grab the index file and clear the section that will include all posts</li>
 <li>For every post, grab it and run a pre-formatter, and sort them in reverse chronological order</li>
 <li>Stack the posts up on the posts section of the index file</li></ol>The trick here was to: identify the posts sections in the index file, wrap the individual posts in their own
 <code>main</code>tag so parsing is easy, and add a
-<code>time</code>tag on each post with the timestamp for sorting.</p>
-<blockquote>So, that was it with step 2. It took a while to get the parsing right, but html is such a powerful and robust way to structure text that it makes things easy; and, Python and strings do work quite nicely together.</blockquote>
-<p>Finally, the gist was setting up a workflow with a yaml file. Here it is:
-<pre>
-<code>name: Auto-update posts on: [push] jobs:   build:     runs-on: ubuntu-latest     steps:       - uses: actions/checkout@v2       - name: Setting up python         uses: actions/setup-python@v2         with:           python-version: 3.9.7       - name: Updating posts         run: |           python update_posts.py       - run: |           git config user.name github-actions           git config user.email github-actions@github.com           git add .           git commit -m ""Auto-Update posts""           git push</code></pre>Note that it is quite self explanatory:
+<code>time</code>tag on each post with the timestamp for
+      sorting.</p>
+<blockquote>So, that was it with step 2. It took a while to get the parsing right, but html is such a powerful
+        and robust way to structure text that it makes things easy; and, Python and strings do work quite nicely
+        together.</blockquote>
+<p>Finally, the gist was setting up a workflow with a yaml file. Here it is:</p>
+<script src="https://gist.github.com/fdch/23fd4077d9b8be0bf017ec420e13add5.js"></script>
+<p>The basic steps in the gist above are:
 <ol>
 <li>Set up python</li>
 <li>Run update_posts.py</li>
 <li>Make and push a commit to github</li></ol>And voilà, every-time a new post is added to the posts directory this action gets fired up.</p>
-<blockquote>So, that was it for blog systems: completely replaced by a script and a set of instructions, and of course, git and the Github Actions backend 😅</blockquote>
+<blockquote>So, that was it for blog systems: completely replaced by a script and a set of instructions, and of
+        course, git and the Github Actions backend 😅</blockquote>
       </article>
     </details>
      
@@ -366,7 +378,7 @@
     <footer>
       If you'd like to contact me, please email me at fdch@nyu.edu.
       <br>
-      Last updated: <time datetime="2022-01-20T04:26:16.056875">on January 20, 2022 at 04:26</time>
+      Last updated: <time datetime="2022-01-20T14:19:39.091401">on January 20, 2022 at 14:19</time>
       <br>
       <a href="https://github.com/fdch/blog">Copyleft <span style="transform: rotate(180deg);">©</span></a>
     </footer>
