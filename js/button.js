@@ -7,8 +7,10 @@ const w = window.innerWidth
           || document.documentElement.clientWidth 
           || document.body.clientWidth 
           || 0;
-postsSection.setAttribute('style', `width: ${w}px;`);
-postsSection.style.width = `${w}px`;
+const pad = 10;
+const width = w - pad;
+postsSection.setAttribute('style', `width: ${width}px;`);
+postsSection.style.width = `${width}px`;
 
 if (currentTheme == "dark") {
   document.body.classList.toggle("dark-theme");
