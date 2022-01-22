@@ -2,6 +2,18 @@ const btn = document.querySelector(".btn-toggle");
 const backButton = document.querySelector(".back");
 const prefersDarkScheme = window.matchMedia("(prefers-color-scheme: dark)");
 const currentTheme = localStorage.getItem("theme");
+const postsSection = document.querySelector("#posts");
+const w = window.innerWidth 
+          || document.documentElement.clientWidth 
+          || document.body.clientWidth 
+          || 0;
+const h = window.innerHeight 
+          || document.documentElement.clientHeight 
+          || document.body.clientHeight 
+          || 0;
+postsSection.setAttribute('style', `width: ${w}px; height: ${h}px;`);
+postsSection.style.width = `${w}px`;
+postsSection.style.height = `${h}px`;
 
 if (currentTheme == "dark") {
   document.body.classList.toggle("dark-theme");

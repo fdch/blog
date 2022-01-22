@@ -9,7 +9,7 @@
       content='A github actions powered workflow with auto python lifter for html blog post and updates'>
     <meta name='keywords' content='Blog, python, auto update, github, actions, workflow'>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
-    <link rel='stylesheet' href='../css/darklight.css'>
+    <link rel='stylesheet' href='../css/main.css'>
   </head>
 
   <body>
@@ -17,8 +17,8 @@
       <button class='back'>⏮</button>
       <button class='btn-toggle'>🌝</button>
     </nav>
-    <main>
-      <time datetime='2022-01-20 04:24:10'>01-20-2022 04:24:10</time>
+    <main class='single-article'>
+      <time title='2022-01-20 04:24:10' datetime='2022-01-20 04:24:10'>2022-01-20 04:24:10</time>
       <h1>Adding Github Actions to this blog</h1>
       <p> I went ahead and relaxed a bit with my blog restrictions. In particular, the <q>No JavaScript</q> one. We like
         JS. However, I was not going to do the whole JSON databasing shebang, fetching, caching, etc…, <a
@@ -39,20 +39,47 @@
         point 2, the <em>function</em> can be written in quite any language. I chose to do this on python, because why
         not delve into the rawness of <a href='https://docs.python.org/3/library/html.parser.html'
           title='that html.parser'>that html.parser</a>. </p>
-      <p> Anyway, after a few hours and a few classes later, the <code>update_posts.py</code> function was finished. It
-        boiled down to three steps:
+      
+          <p>
+            Anyway, after a few hours and a few classes later, the <code>update_posts.py</code> function was finished. It boiled down to three steps:
+          </p>
       <ol>
         <li>Grab the index file and clear the section that will include all posts</li>
         <li>For every post, grab it and run a pre-formatter, and sort them in reverse chronological order </li>
         <li>Stack the posts up on the posts section of the index file </li>
-      </ol> The trick here was to: identify the posts sections in the index file, wrap the individual posts in their own
-      <code>main</code> tag so parsing is easy, and add a <code>time</code> tag on each post with the timestamp for
-      sorting. </p>
+      </ol> 
+      <p>
+        The trick here was to: identify the posts sections in the index file, wrap the individual posts in their own <code>main</code> tag so parsing is easy, and add a <code>time</code> tag on each post with the timestamp for sorting.
+      </p>
+      
       <blockquote> So, that was it with step 2. It took a while to get the parsing right, but html is such a powerful
         and robust way to structure text that it makes things easy; and, Python and strings do work quite nicely
         together. </blockquote>
-      <p> Finally, the gist was setting up a workflow with a yaml file. Here it is:</p>
-      <script src="https://gist.github.com/fdch/23fd4077d9b8be0bf017ec420e13add5.js"></script>
+      <p> Finally, the gist was setting up a workflow with a yaml file. Here is <a title="Github Gist to auto-update posts" href="https://gist.github.com/fdch/23fd4077d9b8be0bf017ec420e13add5#file-update_posts-yml">the gist</a>:</p>
+      <!-- <textarea id="github-gist" name="autoupdate-posts" rows="25" cols="50"> -->
+      <pre>
+name: Auto-update posts
+on: [push]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Setting up python
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.9.7
+      - name: Updating posts
+        run: |
+          python update_posts.py
+      - run: |
+          git config user.name github-actions
+          git config user.email github-actions@github.com
+          git add .
+          git commit -m 'Auto-Update posts'
+          git push
+      </pre>
+
       <p>The basic steps in the gist above are: <ol>
         <li>Set up python</li>
         <li>Run update_posts.py</li>

@@ -8,13 +8,13 @@
 
   <head>
     <title>A blog for ffddcchh</title>
-    <link rel="stylesheet" href="css/darklight.css">
+    <link rel="stylesheet" href="css/main.css">
   </head>
   
   <body>
     <header>
       <h1>A blog for ffddcchh</h1>
-      <button class="btn-toggle">🌝</button>
+      <button class="btn-toggle" title="Dark/Light mode switch">🌝</button>
     </header>
     <main>
       <section id="about">
@@ -38,12 +38,12 @@
         See update_posts.py for reference
       -->
       <section id="posts">
-    <details id="I-started-a-database">
-      <summary>I started a database 💽 of everything I do 👽 (Part 1)</summary>
-      <article>
-        
-<main>
-<time datetime="2022-01-21 06:48:35">01-21-2022 06:48:35 - <a href="posts/i_started_a_database_part_1.html">📄</a></time>
+  <details id="i-started-a-database">
+    <summary title="I started a database 💽 of everything I do 👽 (Part 1)">I started a database 💽 of everything I do 👽 (Part 1)</summary>
+    <article>
+      
+<main class="single-article">
+<time title="2022-01-21 06:48:35" datetime="2022-01-21 06:48:35">Ah, this was a Thursday night... - <a href="posts/i_started_a_database_part_1.html" title="Open in new tab" target="_blank">permalink</a></time>
 <h2>I started a database 💽 of everything I do 👽 (Part 1)</h2>
 <blockquote>This is one of those things that you end up regretting. I don’t recommend it but it was fun.</blockquote>
 <h3>It all began with a doctor’s appointment and an early stage hypertension diagnosis.</h3>
@@ -63,15 +63,15 @@
 <p>Three months later, I had a huge pile of data. I have not parsed it yet; haven’t drawn any conclusions. I just did that 🙉🐭 database, and then, in the beginning of the year 2022, I stopped updating it. It’s been over a month since my last update. I miss it. There was something raw in doing such an extreme and detailed thought work on bodily stuff. I want to parse those numbers and draw conclusions but I need to wait. For some reason, I needed to stop and think. But, I do miss punching in those numbers.</p>
 <p>I wrote this post, perhaps to think better, but I did not get to any conclusion as of now and I doubt I will. I guess an apology is in order, towards you, reader. I embarked us on my journey to databasing, only to take us to where you already knew you were. My blood pressure is still high. I still exercise. I eat less salt 🧂🚫. One thing I can say, though, is that food tastes better after going salt-free for more than two months: the tongue feels different because the taste buds go that  extra mile to extract flavor out from food to my brain.</p>
 <blockquote>To be continued…</blockquote>
-      </article>
-    </details>
-     
-    <details id="Adding-Github-Action">
-      <summary>Adding Github Actions to this blog</summary>
-      <article>
-        
-<main>
-<time datetime="2022-01-20 04:24:10">01-20-2022 04:24:10 - <a href="posts/adding_github_actions.html">📄</a></time>
+    </article>
+  </details>
+   
+  <details id="adding-github-action">
+    <summary title="Adding Github Actions to this blog">Adding Github Actions to this blog</summary>
+    <article>
+      
+<main class="single-article">
+<time title="2022-01-20 04:24:10" datetime="2022-01-20 04:24:10">2022-01-20 04:24:10 - <a href="posts/adding_github_actions.html" title="Open in new tab" target="_blank">permalink</a></time>
 <h2>Adding Github Actions to this blog</h2>
 <p>I went ahead and relaxed a bit with my blog restrictions. In particular, the
 <q>No JavaScript</q>one. We like
@@ -94,20 +94,39 @@
         not delve into the rawness of
 <a href="https://docs.python.org/3/library/html.parser.html" title="that html.parser">that html.parser</a>.</p>
 <p>Anyway, after a few hours and a few classes later, the
-<code>update_posts.py</code>function was finished. It
-        boiled down to three steps:
+<code>update_posts.py</code>function was finished. It boiled down to three steps:</p>
 <ol>
 <li>Grab the index file and clear the section that will include all posts</li>
 <li>For every post, grab it and run a pre-formatter, and sort them in reverse chronological order</li>
-<li>Stack the posts up on the posts section of the index file</li></ol>The trick here was to: identify the posts sections in the index file, wrap the individual posts in their own
+<li>Stack the posts up on the posts section of the index file</li></ol>
+<p>The trick here was to: identify the posts sections in the index file, wrap the individual posts in their own
 <code>main</code>tag so parsing is easy, and add a
-<code>time</code>tag on each post with the timestamp for
-      sorting.</p>
+<code>time</code>tag on each post with the timestamp for sorting.</p>
 <blockquote>So, that was it with step 2. It took a while to get the parsing right, but html is such a powerful
         and robust way to structure text that it makes things easy; and, Python and strings do work quite nicely
         together.</blockquote>
-<p>Finally, the gist was setting up a workflow with a yaml file. Here it is:</p>
-<script src="https://gist.github.com/fdch/23fd4077d9b8be0bf017ec420e13add5.js"></script>
+<p>Finally, the gist was setting up a workflow with a yaml file. Here is
+<a title="Github Gist to auto-update posts" href="https://gist.github.com/fdch/23fd4077d9b8be0bf017ec420e13add5#file-update_posts-yml">the gist</a>:</p><!-- <textarea id="github-gist" name="autoupdate-posts" rows="25" cols="50"> -->
+<pre>name: Auto-update posts
+on: [push]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Setting up python
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.9.7
+      - name: Updating posts
+        run: |
+          python update_posts.py
+      - run: |
+          git config user.name github-actions
+          git config user.email github-actions@github.com
+          git add .
+          git commit -m 'Auto-Update posts'
+          git push</pre>
 <p>The basic steps in the gist above are:
 <ol>
 <li>Set up python</li>
@@ -115,15 +134,15 @@
 <li>Make and push a commit to github</li></ol>And voilà, every-time a new post is added to the posts directory this action gets fired up.</p>
 <blockquote>So, that was it for blog systems: completely replaced by a script and a set of instructions, and of
         course, git and the Github Actions backend 😅</blockquote>
-      </article>
-    </details>
-     
-    <details id="Testing-network-limi">
-      <summary>Testing network limits with collaborative music 🌿🎼🎹</summary>
-      <article>
-        
-<main>
-<time datetime="2022-01-19 03:41:13">01-19-2022 03:41:13 - <a href="posts/testing_network_limits.html">📄</a></time>
+    </article>
+  </details>
+   
+  <details id="testing-network-limi">
+    <summary title="Testing network limits with collaborative music 🌿🎼🎹">Testing network limits with collaborative music 🌿🎼🎹</summary>
+    <article>
+      
+<main class="single-article">
+<time title="2022-01-19 03:41:13" datetime="2022-01-19 03:41:13">2022-01-19 03:41:13 - <a href="posts/testing_network_limits.html" title="Open in new tab" target="_blank">permalink</a></time>
 <h2>Testing network limits with collaborative music 🌿🎼🎹</h2>
 <p>The pandemic year 😷 was hard on all of us. Lockdowns and travel restrictions have not only affected our own music classes and artistic research, but also profoundly changed music performance all over the world. The problem was that musicians could not meet in the same room to play music with each other. But, one thing was clear: music needed to be made. So, musical performance had to be moved to the network. The result of this was proliferation of software for networked music.</p>
 <p>While networked performance —somewhen called
@@ -152,15 +171,15 @@
 <h3>The visuals</h3>
 <p>On the web page there is a visualization of the movement made with the mobile device using yet a separate client that grabs all data from players.</p>
 <blockquote>To be continued… (I’m tired and I’ll go to sleep 😴)</blockquote>
-      </article>
-    </details>
-     
-    <details id="I-reverse-engineered">
-      <summary>I reverse engineered 🥷 an analog synth 🎛 into an open source VST 💾</summary>
-      <article>
-        
-<main>
-<time>01-16-2022 1:55:35 - <a href="posts/i_reverse_engineered_an_analog_synth.html">📄</a></time>
+    </article>
+  </details>
+   
+  <details id="i-reverse-engineered">
+    <summary title="I reverse engineered 🥷 an analog synth 🎛 into an open source VST 💾">I reverse engineered 🥷 an analog synth 🎛 into an open source VST 💾</summary>
+    <article>
+      
+<main class="single-article">
+<time title="2022-01-16 1:55:35" datetime="2022-01-16 1:55:35">2022-01-16 1:55:35 - <a href="posts/i_reverse_engineered_an_analog_synth.html" title="Open in new tab" target="_blank">permalink</a></time>
 <h2>I reverse engineered 🥷 an analog synth 🎛 into an open source VST 💾</h2>
 <blockquote>TL;DR: I made a VST, you can get it here:
 <a href="https://github.com/fdch/Apollo1">https://github.com/fdch/Apollo1</a>. Note: I'm not
@@ -241,15 +260,15 @@
       all I had to do is grab the Camomile releases and replace the patch (and some other stuff, too, read the
       docs for that).</p>
 <blockquote>That's that; no magic. Actually, it was quite magical 🧙‍♂️🎹🎛</blockquote>
-      </article>
-    </details>
-     
-    <details id="How-did-I-start-to-p">
-      <summary>How did I start to program?</summary>
-      <article>
-        
-<main>
-<time>01-15-2022 1:30:00 - <a href="posts/how_did_i_start_to_program.html">📄</a></time>
+    </article>
+  </details>
+   
+  <details id="how-did-i-start-to-p">
+    <summary title="How did I start to program?">How did I start to program?</summary>
+    <article>
+      
+<main class="single-article">
+<time title="2022-01-15 1:30:00" datetime="2022-01-15 1:30:00">2022-01-15 1:30:00 - <a href="posts/how_did_i_start_to_program.html" title="Open in new tab" target="_blank">permalink</a></time>
 <h2>How did I start to program?</h2>
 <p>Trying to recall my first program proves way harder a task than I could anticipate. Partly, because my
         memory has been giving me headaches as it gets more and more difficult to remember stuff that happened
@@ -333,15 +352,15 @@
         no. Any software was easy to grasp, any operating system.</p>
 <p>In sum, I cannot remember exactly when I started to program, but I do remember an obsession that grew hand
         in hand with my fascination of the Internet, computers, and code.</p>
-      </article>
-    </details>
-     
-    <details id="Making-a-blog-with-y">
-      <summary>Making a blog with your 📱</summary>
-      <article>
-        
-<main>
-<time>01-14-2022 18:00:00 - <a href="posts/making_a_blog_with_your_phone.html">📄</a></time>
+    </article>
+  </details>
+   
+  <details id="making-a-blog-with-y">
+    <summary title="Making a blog with your 📱">Making a blog with your 📱</summary>
+    <article>
+      
+<main class="single-article">
+<time title="2022-01-14 18:00:00" datetime="2022-01-14 18:00:00">2022-01-14 18:00:00 - <a href="posts/making_a_blog_with_your_phone.html" title="Open in new tab" target="_blank">permalink</a></time>
 <h2>Making a blog with your 📱</h2>
 <p>Today, I decided to make a blog with my phone and a Github account.
       Here are the steps that I took to achieve this.</p>
@@ -397,18 +416,18 @@
 <br>What's fun is that there is: No js ☹️, no php 🥲, no frameworks 😅;
       It took less than 2 hs to get it running and write this post 🤩.
       Now it's just a matter of continuing it... 🙃</blockquote>
-      </article>
-    </details>
-    </section>
+    </article>
+  </details>
+  </section>
       <!-- DONE WITH THE 'posts' SECTION -->
     </main>
     <hr>
     <footer>
       If you'd like to contact me, please email me at fdch@nyu.edu.
       <br>
-      Last updated: <time datetime="2022-01-21T06:52:09.209108">on January 21, 2022 at 06:52</time>
+      Last updated: <time title="2022-01-21 20:31:52.839987" datetime="2022-01-21 20:31:52.839987"> January 21, 2022, 20:31</time>
       <br>
-      <a href="https://github.com/fdch/blog">Copyleft <span style="transform: rotate(180deg);">©</span></a>
+      <a href="https://github.com/fdch/blog" title="Fork me on Github">Copyleft ©</a>
     </footer>
     <script src="js/button.js"></script>
   </body>

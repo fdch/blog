@@ -1,3 +1,4 @@
+
 main time {
   font-size: 0.75em;
 }
@@ -9,6 +10,9 @@ footer {
 
 summary {
   outline:none;
+}
+summary:hover {
+  cursor:pointer;
 }
 
 details[open] summary {
@@ -45,6 +49,10 @@ body.dark-theme {
     --bkg-color: #fff;
     --filter: None;
   }
+
+  .flip {
+    --rotate: 180deg;
+  }
 }
 
 
@@ -63,9 +71,20 @@ a::after {
   filter: var(--filter); 
 }
 
+/* figure { */
+  /* display: flex; */
+  /* flex-direction: column; */
+  /* align-items: center; */
+  /* justify-content: center; */
+  /* margin: 0 auto; */
+  /* max-width: 800px; */
+/* } */
 
 img {
   max-width: 100%;
+  /* height: auto; */
+  /* padding:0; */
+  /* margin:0 auto; */
 }
 
 header {
@@ -81,4 +100,48 @@ button {
   border-radius: 5px;
   margin: 10px;
   cursor: pointer;
+}
+
+blockquote {
+  border-left: 0.15em solid var(--text-color);
+  padding-left: 10px;
+}
+
+article, .single-article{
+  max-width: 800px;
+  margin: 0 auto;
+  flex-direction:column;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.single-article h1, .single-article h3 {
+  border-bottom: 0.15em solid var(--text-color);
+}
+
+.single-article h2, .single-article h3 {
+  align-items:left;
+  text-align:left;
+}
+
+.single-article {
+  border-bottom: 0.2em dashed var(--text-color);
+  margin-bottom: 30px;
+}
+
+pre {
+  font-family:'Courier New', Courier, monospace;
+  font-weight:bold;
+  border:0;
+  font-size:12pt;
+  max-width:600px;
+  overflow-x:scroll;
+  white-space: pre-wrap;
+  height:300px;
+  padding:20px;
+  border-radius:12px;
+  background-color: #121212;
+  color:#eee;
 }
