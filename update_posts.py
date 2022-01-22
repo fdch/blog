@@ -9,10 +9,6 @@ from src.formatpost import FormatPost
 from src.delpost import DelPost
 from src.fillpost import FillPost
 
-# from classes.delpost import DelPost
-# from classes.formatpost import FormatPost
-# from classes.fillpost import FillPost
-
 def main(index_file="index.html", posts_dir="posts", new_index=None):
   
   if new_index is None: new_index = index_file
