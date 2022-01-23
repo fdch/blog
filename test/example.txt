@@ -1,0 +1,31 @@
+title: This is a title -- 😇 oh, yeah!
+
+| And this is a block quote text, pretty cool, eh?
+
+This is a paragraph. Continuing
+on the same line
+
+This is another paragraph
+
+image: http://myurl.com.ar | my favorite title | This is the caption of the image
+
+subtitle: this is a subtitle
+
+- this is an unordered list
+- with items
+- many items
+- - and sub items
+- - oh, heay
+
+some paragraph and then, a blockquote
+| telling you some stuff
+
+subtitle: yet another title
+
+1. this is an ordered list
+2. with three items
+3. and sub items
+4. 1. oh, yeas one
+5. 2. oh, yeas 2
+
+| final notes, thank you for reading. 😁

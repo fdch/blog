@@ -14,7 +14,7 @@ class FillPost(DelPost):
     self.new_data = new_data
 
   def handle_starttag(self, tag, attrs):
-    self.copy_start(tag, attrs)
+    self.copy_tag(tag, attrs)
     self.is_in_tag(tag, attrs)
     self.last_tag = tag
     if self.in_posts:

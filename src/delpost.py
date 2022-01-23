@@ -29,7 +29,7 @@ class DelPost(HTMLParser):
     self.in_footer = False # are we in the footer section?
     self.last_tag = '' # last tag we saw
 
-  def copy_start(self, tag, attrs):
+  def copy_tag(self, tag, attrs):
     """ Copy start tag and attributes to output """
     self.out += f"<{tag}"
     self.out += expand_attributes(attrs) if attrs else ''
@@ -58,7 +58,7 @@ class DelPost(HTMLParser):
     if self.in_footer and tag == 'time':
       return
     
-    self.copy_start(tag, attrs)
+    self.copy_tag(tag, attrs)
     self.is_in_tag(tag, attrs)
 
   def handle_endtag(self, tag):
