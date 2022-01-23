@@ -14,17 +14,18 @@ lightIconSpan.innerHTML = lightIcon;
 let darkIconSpan = document.createElement("div")
 darkIconSpan.innerHTML = darkIcon;
 
-let currentIcon = lightIconSpan;
+let currentIcon = darkIconSpan;
+let lastIcon = null;
 
 updateIcon = (theme) => {
-  lastIcon = currentIcon;
   if (theme == "dark") {
     currentIcon = lightIconSpan;
   } else if (theme == "light") {
     currentIcon = darkIconSpan;
   }
-  if (btn.firstChild === lastIcon) btn.removeChild(btn.firstChild);
+  if (lastIcon!==null && btn !== lastIcon) btn.removeChild(btn.firstChild);
   btn.appendChild(currentIcon);
+  lastIcon = currentIcon;
 }
 
 if (currentTheme == "light") {
@@ -35,8 +36,7 @@ if (currentTheme == "light") {
 
 updateIcon()
 
-// the below code is for the toggle button
-btn.addEventListener("click", function () {
+updateTheme = () => {
   let theme;
   if (prefersDarkScheme.matches) {
     document.body.classList.toggle("light-theme");
@@ -51,24 +51,38 @@ btn.addEventListener("click", function () {
   }
   updateIcon(theme);
   localStorage.setItem("theme", theme);
+}
+
+// the below code is for the toggle button
+btn.addEventListener("click", function () {
+  updateTheme();
 });
 
 // The back button for the posts page
 if (backButton!==null) {
-  backButton.addEventListener('click', function () {
+  backButton.appendChild(backIconSpan).addEventListener('click', () => {
     document.location.href = "../index.html";
   });
 }
 let rotateAngle = 0;
+let loaded = false;
 
-rotation = () => {
-  rotateAngle += 4;
-  currentIcon.style.transform = `rotate(${rotateAngle}deg)`;
+rotation = (icon) => {
+  if (!loaded) {
+    rotateAngle += 4;
+    icon.style.transform = `rotate(${rotateAngle}deg)`;
+  }
 }
 
-rotationInterval = setInterval(() => rotation(), 2)
+rotationInterval = setInterval(() => rotation(currentIcon), 2)
 
 window.onload = () => {
-  clearInterval(rotationInterval);
-  currentIcon.style.transform = `rotate(0deg)`;
+  if (!loaded) {
+    clearInterval(rotationInterval);
+    currentIcon.style.transform = `rotate(0deg)`;
+  } else {
+    loaded = true;
+  }
+  updateTheme()
 };
+
