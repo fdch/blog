@@ -17,7 +17,7 @@ __all__ = [
   'get_timestamp'
 ]
 
-def make_url(url, text=None, title=None, target='_blank'):
+def make_url(url, text=None, title=None, target='_top'):
   """ Returns a html link anchor tag """
   if text is None:
     text = url
