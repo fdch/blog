@@ -71,6 +71,7 @@ class ParsePost(object):
     # go through the lines
     for s in self.text:
 
+      # The code block
       if re.match(p_code, s):
         code_lang = re.match(p_code, s).group(1)
         if code_lang:
@@ -88,7 +89,8 @@ class ParsePost(object):
       if code_toggle:
         b_code.append(s)
         continue
-
+      
+      # The raw html input ( not checked for validity )
       if is_html and (html_tag is not None):
         if re.match(rf".*</{html_tag}>", s):
           is_html = False
@@ -112,11 +114,10 @@ class ParsePost(object):
 
       # The title
       elif re.match(p_title, s):
-        tag = Element('h1')
-        tag.text = clean(s, p_title)
+        self.title_tag = Element('h1')
+        self.title_tag.text = clean(s, p_title)
         # store the title for the <title> tag
-        self.title = tag.text
-        self.post.append(tag)
+        self.title = self.title_tag.text
         continue
       
       # The subtitle
@@ -128,18 +129,17 @@ class ParsePost(object):
       
       # The timestamp
       elif re.match(p_time, s):
-        tag = Element('time')
+        self.time_tag = Element('time')
         data = clean(s, p_time).split('|')
-        timestamp, timetag = None, None
+        timestamp, time_tag = None, None
         if len(data):
           timestamp = data.pop(0).strip()
-          tag.attrib.update({'datetime': timestamp})
+          self.time_tag.attrib.update({'datetime': timestamp})
         if len(data):
-          timetag = data.pop(0).strip()
+          time_tag = data.pop(0).strip()
         self.timestamp = get_timestamp(timestamp)
         self.timestring = self.timestamp.isoformat(sep=' ')
-        tag.text = timetag or timestamp or ''
-        self.post.append(tag)
+        self.time_tag.text = time_tag or timestamp or ''
         continue
       
       # The image
@@ -257,6 +257,13 @@ class ParsePost(object):
     SubElement(nav, 'button', attrib={'class': 'mode'})
     # [BODY] The <main> element
     main = SubElement(body, 'main', attrib={'class': self.article_class})
+
+    # [BODY>MAIN] The <header> element
+    header = SubElement(main, 'header')
+    header.append(self.time_tag)
+    header.append(self.title_tag)
+    
+    # [BODY>MAIN] The Post content
     for tag in self.post:
       main.append(tag)
     
@@ -268,6 +275,7 @@ class ParsePost(object):
     p = SubElement(ad,'p')
     p.text = self.outcome
     SubElement(p,'a',attrib={'href':'mailto:%s' % self.email}).text=self.email
+    footer.append(nav)
     
     # [BODY] The <script> at the end of <body>
     SubElement(body, 'script', attrib={'src': self.ui, 'charset':self.encoding})
@@ -276,7 +284,7 @@ class ParsePost(object):
     
     if self.autoindent:
       indent(self.root)
-    
+
     with open(filename or self.textfile+'.html', 'wb') as fp:
       fp.write(f"{self.doctype}\n".encode(self.encoding))
       ElementTree(self.root).write(fp, encoding=self.encoding, xml_declaration=False, method='html')
