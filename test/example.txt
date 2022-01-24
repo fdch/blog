@@ -1,13 +1,21 @@
 title: This is a title -- 😇 oh, yeah!
 
+<details><summary>Testing</summary>
+
+
+Some <b>stuff</b>...</details>
+
+
 | And this is a block quote text, pretty cool, eh?
+
+subtitle: This is my first subtitle
 
 This is a paragraph. Continuing
 on the same line
 
 This is another paragraph
 
-image: http://myurl.com.ar | my favorite title | This is the caption of the image
+image: ../images/15CB060D-002D-451A-AB8A-2FC04EBBEE90.jpeg | This is the caption of the image | my favorite title
 
 subtitle: this is a subtitle
 
@@ -18,9 +26,19 @@ subtitle: this is a subtitle
 - - oh, heay
 
 some paragraph and then, a blockquote
+
 | telling you some stuff
 
 subtitle: yet another title
+
+<h3>You can even set your own html tags</h3>
+
+<p>This is a paragraph coming straignt 
+from html stuff</p>
+
+`
+This is a piece of code
+`
 
 1. this is an ordered list
 2. with three items
