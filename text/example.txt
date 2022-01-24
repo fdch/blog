@@ -1,0 +1,50 @@
+time: 2022-01-22 11:55:01 | A sunny Sunday afternoon
+title: I made a text parser to make easier posts 😇 
+description: This is a post about an example post. This description must reside in a single line of any lenght. Just don't do any newlines here and you'll be good.
+keywords: these, are, keywords, separated, by, commas, like, programming, blogging, composition, music, databasing
+
+This post is written in plain text and parsed with a custom parser.
+It's similar to markdown, but slightly different.
+
+| And this is a block quote text, pretty cool, eh?
+
+subtitle: This is my first subtitle
+
+<details><summary>Testing</summary>
+Some <b>stuff</b>...</details>
+
+
+This is a paragraph. Continuing
+on the same line
+
+This is another paragraph
+
+image: ../images/15CB060D-002D-451A-AB8A-2FC04EBBEE90.jpeg | This is the caption of the image | my favorite title
+
+subtitle: this is a subtitle
+
+- this is an unordered list
+- with items
+- many items
+
+some paragraph and then, a blockquote
+
+| telling you some stuff
+
+subtitle: yet another title
+
+<h3>You can even set your own html tags</h3>
+
+<p>This is a paragraph coming straignt 
+from html stuff</p>
+
+```js
+// this is a js comment
+() => window.alert("ok, this is cool");
+```
+
+1. this is an ordered list
+2. with three items
+3. and, yes, I said three
+
+| final notes, thank you for reading. 😁

@@ -66,10 +66,10 @@ def replace_dir(string):
   else:
     return string
 
-def expand_attributes(attrs):
+def expand_attributes(attrs, quote='\"'):
   """ Expand attrs back to html string """
   if attrs:
-    expand_attributes = lambda x : f"{x[0]}=\"{replace_dir(x[1])}\""
+    expand_attributes = lambda x : f"{x[0]}={quote}{replace_dir(x[1])}{quote}"
     return ' ' + ' '.join(list(map(expand_attributes, attrs)))
   else:
     return ''
