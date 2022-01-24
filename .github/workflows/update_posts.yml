@@ -11,6 +11,7 @@ jobs:
           python-version: 3.9.7
       - name: Updating posts
         run: |
+          python parse_posts.py text posts
           python update_posts.py
       - run: |
           git config user.name github-actions
