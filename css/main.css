@@ -84,7 +84,7 @@ img {
   margin:0 auto;
 }
 
-header {
+header.main {
   display:flex;
   flex-direction: row;
 }
