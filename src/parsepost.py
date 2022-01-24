@@ -29,7 +29,8 @@ class ParsePost(object):
     b_olist = [] # buffer for an ordered list
     b_ulist = [] # buffer for an unordered list
     b_par = []   # buffer for a paragraph
-    b_html = []   # buffer for an html tag
+    b_html = []  # buffer for an html tag
+    b_code = []  # buffer for a code block
     
     # regexes
     p_title = re.compile(r'^title:\s+')
@@ -39,6 +40,9 @@ class ParsePost(object):
     p_ulist = re.compile(r'^-\s+')
     p_olist = re.compile(r'^[0-9]\.\s+')
     p_html_open = re.compile(r'^<\w+>')
+    p_code = re.compile(r'^\s*```(.*)')
+
+    code_toggle = False
     
     # is it a new line
     is_new_line = lambda s: re.match(r'^\n$', s) or re.match(r'^\r\n$', s)
@@ -48,6 +52,24 @@ class ParsePost(object):
     
     # go through the lines
     for s in self.text:
+
+      if re.match(p_code, s):
+        code_lang = re.match(p_code, s).group(1)
+        if code_lang:
+          code_language = code_lang
+        code_toggle = not code_toggle
+        if not code_toggle and len(b_code):
+          tag = Element('pre')
+          if code_language:
+            tag.attrib.update({'language': code_language})
+          tag.text = ''.join(b_code)
+          b_code = []
+          self.post.append(tag)
+        continue
+
+      if code_toggle:
+        b_code.append(s)
+        continue
 
       if is_html and (html_tag is not None):
         if re.match(rf".*</{html_tag}>", s):
@@ -164,6 +186,8 @@ class ParsePost(object):
         b_block = []
         self.post.append(tag)
         continue
+    
+
 
       consecutive_lines = 0
   
