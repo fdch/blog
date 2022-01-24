@@ -36,9 +36,10 @@ subtitle: yet another title
 <p>This is a paragraph coming straignt 
 from html stuff</p>
 
-`
-This is a piece of code
-`
+```js
+// this is a js comment
+() => window.alert("ok, this is cool");
+```
 
 1. this is an ordered list
 2. with three items
