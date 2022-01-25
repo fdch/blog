@@ -7,21 +7,27 @@
 from src.parsepost import ParsePost  
 from pathlib import Path
 
-def main(texts_dir, posts_dir):
+def main(d_from, d_to, overwrite=False):
 
-  posts_dir += '/' if not str(posts_dir).endswith('/') else ''
-  texts_dir += '/' if not str(texts_dir).endswith('/') else ''
+  d_to += '/' if not str(d_to).endswith('/') else ''
+  d_from += '/' if not str(d_from).endswith('/') else ''
 
-  texts_files = Path(texts_dir).glob('*.txt')
-  posts_files = Path(posts_dir).glob('*.html')
-
+  texts_files = Path(d_from).glob('*.txt')
+  posts_files = Path(d_to).glob('*.html')
+  touch = 0
   for i in texts_files:
-    if i.stem not in [j.stem for j in posts_files]:
-      print("Converting:", i.stem)
+    if i.stem not in [j.stem for j in posts_files] or overwrite:
+      print("Converting:", i)
       parser = ParsePost(i)
       parser.parse()
       parser.compile()
-      parser.write(posts_dir + '/' + i.stem + '.html')
+      parser.write(d_to + '/' + i.stem + '.html')
+      touch += 1
+  
+  if touch == 0:
+    print("No new files to convert.")
+  else:
+    print("Converted", touch, "files.")
 
 
 # -----------------------------------------------------------------------------
@@ -29,21 +35,17 @@ def main(texts_dir, posts_dir):
 # -----------------------------------------------------------------------------
 
 if __name__ == "__main__":
-  import sys
-  args = sys.argv[1:]
-  if len(args) >= 2:
-    from os.path import exists
-    if not exists(args[0]): 
-      raise Exception(f"{args[0]} does not exist")
-    else:
-      texts_dir = args[0]
-    if not exists(args[1]): 
-      raise Exception(f"{args[1]} does not exist")
-    else:
-      posts_dir = args[1]
-    if len(args) > 2 :
-      print("Ignoring extra arguments:", args[2:])
-  else:
-    raise Exception("Not enough arguments")
+  import argparse
+  parser = argparse.ArgumentParser(description='Convert a text file to HTML.')
+  parser.add_argument('-f', '--from',
+                      help='Directory with the text files.')
+  parser.add_argument('-t', '--to',
+                      help='Directory to store the HTML files.')
+  parser.add_argument('-o', '--overwrite',
+                      action='store_true',
+                      help='Overwrite existing HTML files.')
+  # Get the arguments
+  args = parser.parse_args()
+  # Run the main program
+  main(getattr(args, 'from'), getattr(args, 'to'), getattr(args,'overwrite'))
   
-  main(texts_dir, posts_dir)
