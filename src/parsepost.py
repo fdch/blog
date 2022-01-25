@@ -33,6 +33,9 @@ class ParsePost(object):
     with open(self.textfile, 'r') as fp:
       self.text = fp.readlines()
   
+  
+  
+
   def parse(self):
     """ Parse the text file and return a string with the HTML code. """
     
@@ -59,6 +62,43 @@ class ParsePost(object):
     p_olist = re.compile(r'^[0-9]\.\s+')
     p_html_open = re.compile(r'^<\w+>')
     p_code = re.compile(r'^\s*```(.*)')
+
+    def check_for_links(element, s):
+      """ Check if the string s contains a link. 
+      Notes
+      -----
+      Only matches the last link.
+      """
+      links = re.compile(r'.*\[.*\]\(.*\).*')
+      found_links = re.findall(links, s)
+
+      if found_links:
+        link = found_links.pop(0)
+        n = re.compile(r'(?P<prev>.*)\[(?P<text>.*)\]\((?P<url>.*)\)(?P<post>.*)')
+        m = re.match(n, link)
+        if m.group('prev'):
+          element.text = m.group('prev')
+        
+        def make_link(element, url, text, post):
+          if url:
+            a = SubElement(element, 'a', attrib={'href': url})
+            a.text = text or url
+          if post:
+            a.tail = post
+        
+        make_link(element, m.group('url'), m.group('text'), m.group('post'))
+        # while True:
+        #   try:
+        #     link = found_links.pop(0)
+        #   except IndexError:
+        #     break
+        #   m = re.match(n, link)
+        #   make_link(element, m.group('url'), m.group('text'), m.group('post'))
+
+      else:
+        element.text = s
+
+      return element
 
     code_toggle = False
     
@@ -219,7 +259,7 @@ class ParsePost(object):
 
       elif len(b_par):
         tag = Element('p')
-        tag.text = ' '.join(b_par).strip()
+        tag = check_for_links(tag, ' '.join(b_par).strip())
         b_par = []
         self.post.append(tag)
         continue
