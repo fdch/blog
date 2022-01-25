@@ -5,7 +5,7 @@
 # Distributed under the terms of the GNU General Public License
 # -----------------------------------------------------------------------------
 import re
-from xml.etree.ElementTree import ElementTree, Element, SubElement, indent, fromstring
+from xml.etree.ElementTree import ElementTree, Element, SubElement, Comment, indent, fromstring
 from src.utilities import expand_attributes, get_timestamp
 
 __all__ = ['ParsePost']
@@ -32,9 +32,6 @@ class ParsePost(object):
     
     with open(self.textfile, 'r') as fp:
       self.text = fp.readlines()
-  
-  
-  
 
   def parse(self):
     """ Parse the text file and return a string with the HTML code. """
@@ -62,6 +59,7 @@ class ParsePost(object):
     p_olist = re.compile(r'^[0-9]\.\s+')
     p_html_open = re.compile(r'^<\w+>')
     p_code = re.compile(r'^\s*```(.*)')
+    p_comment = re.compile(r'^//.*')
 
     def check_for_links(element, s):
       """ Check if the string s contains a link. 
@@ -150,6 +148,12 @@ class ParsePost(object):
       # The Meta keywords
       elif re.match(p_keywords, s):
         self.keywords = clean(s, p_keywords).split(',')
+        continue
+
+      # The comments to ignore
+      elif re.match(p_comment, s):
+        tag = Comment(s.replace('//', ''))
+        self.post.append(tag)
         continue
 
       # The title
