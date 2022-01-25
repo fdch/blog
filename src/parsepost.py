@@ -69,20 +69,26 @@ class ParsePost(object):
       """
       links = re.compile(r'.*\[.*\]\(.*\).*')
       found_links = re.findall(links, s)
+      # print(found_links)
 
       if found_links:
         link = found_links.pop(0)
         n = re.compile(r'(?P<prev>.*)\[(?P<text>.*)\]\((?P<url>.*)\)(?P<post>.*)')
         m = re.match(n, link)
+        # print('text', m.group('text'))
+        # print('url', m.group('url'))
+        # print('pref', m.group('prev'))
+        # print('post',m.group('post'))
+        
         if m.group('prev'):
           element.text = m.group('prev')
         
         def make_link(element, url, text, post):
-          if url:
-            a = SubElement(element, 'a', attrib={'href': url})
-            a.text = text or url
-          if post:
-            a.tail = post
+          a = Element('a')
+          a.attrib.update({'href': url or ''})
+          a.text = text or url or ''
+          a.tail = post or ''
+          element.append(a)
         
         make_link(element, m.group('url'), m.group('text'), m.group('post'))
         # while True:
@@ -248,7 +254,7 @@ class ParsePost(object):
       if len(b_olist):
         tag = Element('ol')
         for s in b_olist:
-          SubElement(tag, 'li').text = s
+          tag.append(check_for_links(Element('li'), s))
         b_olist = []
         self.post.append(tag)
         continue
@@ -256,7 +262,7 @@ class ParsePost(object):
       elif len(b_ulist):
         tag = Element('ul')
         for s in b_ulist:
-          SubElement(tag, 'li').text = s
+          tag.append(check_for_links(Element('li'), s))
         b_ulist = []
         self.post.append(tag)
         continue
@@ -270,7 +276,7 @@ class ParsePost(object):
       
       elif len(b_block):
         tag = Element('blockquote')
-        tag.text = clean(' '.join(b_block), p_block)
+        tag = check_for_links(tag, clean(' '.join(b_block), p_block))
         b_block = []
         self.post.append(tag)
         continue
