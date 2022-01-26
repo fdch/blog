@@ -22,6 +22,7 @@
       <blockquote>So, I <a href="../posts/example.html">made a text parser</a>  but I did not really explain how it works. Here’s my attempt.</blockquote>
       <p>It all started with a need to write posts directly on my phone. Doing so in HTML proved to be quite cumbersome. Every element had to be opened, filled with text and/or attributes, and then closed. It became, besides a nuisance, quite error prone. My phone’s error correction and auto capitalization made HTML tags look really funny, and they broke most of the time. Therefore, I needed some way to input text and have the HTML elements properly set.</p>
       <h2>Post Factory: Enter Google Sheets… and a lot of copy-pasting</h2>
+      <p>I’m not sure why, but I tend to use Sheets for everything. That’s a bug or a feature, your call; I just overdo it sometimes. In several occasions, Sheets is the way to go; most often the case is quite the opposite. Anyhow, I came up with a plausible solution:</p>
       <ol>
         <li>A column of HTML elements: “p”</li>
         <li>B column of input text: “My paragraph…”</li>
@@ -29,24 +30,23 @@
       </ol>
       <pre class="language-html" title="html" data-language="html">&lt;p&gt;My paragraph…&lt;/p&gt;
 </pre>
-      <p>I’m not sure why, but I tend to use Sheets for everything. That’s a bug or a feature, your call; I just overdo it sometimes. In several occasions, Sheets is the way to go; most often the case is quite the opposite. Anyhow, I came up with a plausible solution:</p>
       <blockquote>Voilà! I did not stop there, though.</blockquote>
       <h2>The last cell</h2>
       <p>The Sheet grew with separate tabs for meta tags, and finally, for the complete HTML file. The last cell grabbed the text from all other cells and outputted an <code>&lt;html&gt;</code>  root element with the content of the entire post. Thus, I had a created template factory for blog posts, entirely with Google Sheets and string concatenation. Fancy stuff.</p>
-      <h2>copy pasting hell</h2>
       <blockquote>…well, not so fancy.</blockquote>
+      <h2>copy pasting hell</h2>
       <p>This involved copying and pasting so much text, so many times, across apps on my phone, that it was unsustainable. After four or five posts I was done with it. I wanted a better way.</p>
       <h2>Formatting problems</h2>
       <p>Another problem was the formatting. The resultant markup was a single line of a text file. Completely impractical for editing.</p>
-      <h2>A new hope: 🐍</h2>
       <blockquote>To solve this, I added some new lines within the cell text parsing (in Sheets that is called CHAR(10) or CHAR(13)), only to find that these reconfigured how Sheets formatted the cells: it introduced nasty surrounding quotes! Ugh, what a pain for the unhappy copy-paster.</blockquote>
+      <h2>A new hope: 🐍</h2>
       <p>I thought of a new way to make posts. I would use Markdown, a hip, simple, and modern text markup language with many available editors for iOS. With minimal code, text is very nicely set on the page and many languages have parsing libraries for it.</p>
       <blockquote>Python has many markdown libs, so I could make a python script that parses a <code>.md</code>  file into an <code>.html</code>  file and place it inside the <code>posts</code>  directory before the <code>update_posts.py</code>  scripts updates the landing page. I was getting excited by the minute</blockquote>
       <h2>I did not want to use pip in the github workflow 🤷🏽‍♂️</h2>
       <p>In order to get any markdown library into my python version on the ubuntu shell up accessed by the Github Actions workflow, I needed to run <code>pip install markdown</code>  or similar before running the process. Or, better yet, I needed to make a virtual environment for python and activate it before running python. Ugh, I did not want to do any of that.</p>
+      <blockquote>If my experience with Pure Data has anything to add here, it would be that vanilla is usually the way to go.</blockquote>
       <p>Therefore, I just went ahead and decided to parse the text myself using only the standard (vanilla) python. That is, only using what comes with python version &gt;= 3.9. Why not?!</p>
       <h2>I started writing a post with made-up tags and I would sort it out later.</h2>
-      <blockquote>If my experience with Pure Data has anything to add here, it would be that vanilla is usually the way to go.</blockquote>
       <p>I have no other way of making up a parser like this. I am not a pure-bred programmer, and I am not a language expert, so I cannot start thinking in terms of meta-language descriptors, or formal grammar, etc. Besides, this was a simple markup. And, I needed to KISS (keep it simple, stupid) 🙃 So, I started making it up as I went.</p>
       <blockquote>Funny thing, while writing this post I realized that I did not include hyperlinks. HYPERLINKS! The Internet gods forgive me 🤦🏻‍♂️. I hope to include them before writing this post. If that worked, I should be able to <a href="https://en.m.wikipedia.org/wiki/Hyperlink">understand what hyperlinks are</a> , finally 🤓.</blockquote>
       <h2>The result</h2>
@@ -55,7 +55,7 @@
       <blockquote>Hope it’s useful for someone (besides me) 😋</blockquote>
     </main>
     <footer>
-      <time datetime="2022-01-26 17:05:06.768276">Published on 2022-01-26 17:05:06.768276</time>
+      <time datetime="2022-01-26 17:10:56.284398">Published on 2022-01-26 17:10:56.284398</time>
       <address>
         <p>If you'd like to contact me, email me at: <a href="mailto:fdch@nyu.edu">fdch@nyu.edu</a>
         </p>
