@@ -5,7 +5,7 @@
 # Distributed under the terms of the GNU General Public License
 # -----------------------------------------------------------------------------
 import re
-from xml.etree.ElementTree import ElementTree, Element, SubElement, Comment, indent, fromstring
+from xml.etree.ElementTree import ElementTree, Element, SubElement, Comment, indent, fromstring, tostring
 from src.utilities import expand_attributes, get_timestamp
 
 __all__ = ['ParsePost']
@@ -61,6 +61,64 @@ class ParsePost(object):
     p_code = re.compile(r'^\s*```(.*)')
     p_comment = re.compile(r'^//.*')
 
+    # def check_for_inlines(element, s):
+    #   """ Check if the string s contains inline elements. 
+    #   `` is code block
+    #   ** is bold
+    #   * is italic
+    #   _ is underline
+    #   ~ is strike
+
+    #   """
+      # element = check_for_block(element, s)
+      # element = check_for_block(element, element.text, char='*', tag='i')
+      # element = check_for_block(element, element.text, char='**', tag='b')
+      # element = check_for_block(element, element.text, char='~', tag='s')
+      # return element
+
+    def check_for_block(element, s):
+      """ Check for the `char` character to open and close inline `code` blocks. """
+      curr_inblock = False
+      prev_inblock = not curr_inblock
+      sub = None
+      sub_array = []
+      count = 0
+      
+      if '`' not in s:
+        element.text = s
+        return element
+
+      for i in s:
+        if i == '`':
+          curr_inblock = not curr_inblock
+        else:
+          if prev_inblock != curr_inblock:
+            sub = Element('code') if curr_inblock else sub
+            if count % 2 == 0:
+              sub_array.append(sub)
+            prev_inblock = curr_inblock
+          
+          if curr_inblock:
+            if sub.text is None:
+              sub.text = ''
+            sub.text += i
+          else:
+            if sub is None:
+              if element.text is None:
+                element.text = ''
+              element.text += i
+            else:
+              if sub_array[-1].tail is None:
+                sub_array[-1].tail = ''
+              sub_array[-1].tail += i
+      
+      for idx,e in enumerate(sub_array[1:]):
+        if idx % 2 == 0:
+          element.append(e)
+
+      return element
+
+
     def check_for_links(element, s):
       """ Check if the string s contains a link. 
       Notes
@@ -81,7 +139,7 @@ class ParsePost(object):
         # print('post',m.group('post'))
         
         if m.group('prev'):
-          element.text = m.group('prev')
+          element = check_for_block(element, m.group('prev'))
         
         def make_link(element, url, text, post):
           a = Element('a')
@@ -100,7 +158,9 @@ class ParsePost(object):
         #   make_link(element, m.group('url'), m.group('text'), m.group('post'))
 
       else:
-        element.text = s
+        element = check_for_block(element, s)
+        # element.text = s
+
 
       return element
 
@@ -165,7 +225,7 @@ class ParsePost(object):
       # The title
       elif re.match(p_title, s):
         self.title_tag = Element('h1')
-        self.title_tag.text = clean(s, p_title)
+        self.title_tag = check_for_block(self.title_tag, clean(s, p_title))
         # store the title for the <title> tag
         self.title = self.title_tag.text
         continue
@@ -173,7 +233,7 @@ class ParsePost(object):
       # The subtitle
       elif re.match(p_subtitle, s):
         tag = Element('h2')
-        tag.text = clean(s, p_subtitle)
+        tag = check_for_block(tag, clean(s, p_subtitle))
         self.post.append(tag)
         continue
       

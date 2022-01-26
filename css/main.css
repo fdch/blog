@@ -129,17 +129,23 @@ article, .single-article{
   margin-bottom: 30px;
 }
 
-pre {
+pre, code {
+  border: 1px solid var(--text-color);
   font-family:'Courier New', Courier, monospace;
   font-weight:bold;
-  border:0;
   font-size:12pt;
+  background-color: #121212;
+  color:#eee;
+}
+pre {
   max-width:600px;
   overflow-x:scroll;
   white-space: pre-wrap;
   height:300px;
   padding:20px;
   border-radius:12px;
-  background-color: #121212;
-  color:#eee;
+}
+code {
+  padding:5px;
+  border-radius:2px;
 }
