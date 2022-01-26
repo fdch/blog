@@ -4,6 +4,7 @@
 # Copyleft (c) 2022, Fede Camara Halac.
 # Distributed under the terms of the GNU General Public License
 # -----------------------------------------------------------------------------
+from .templatepost import *
 from .parsepost import *
 from .delpost import *
 from .formatpost import *
