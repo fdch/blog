@@ -1,21 +1,25 @@
 const backIcon  = "⏮";
 const lightIcon = "🌝";
 const darkIcon  = "🌚";
+const backIconText = "Back to blog";
+const lightIconText = "Light-mode Switch";
+const darkIconText = "Dark-mode Switch";
 
 const prefersDarkScheme = window.matchMedia("(prefers-color-scheme: dark)");  
 const modeBtn = document.querySelector(".mode");
-const backBtn = document.querySelector(".back");
 const windowStorage = window.localStorage;
 const currentTheme = windowStorage.getItem("theme");
 
-let backIconSpan = document.createElement("div")
-backIconSpan.innerHTML = backIcon;
-let lightIconSpan = document.createElement("div")
-lightIconSpan.innerHTML = lightIcon;
-let darkIconSpan = document.createElement("div")
-darkIconSpan.innerHTML = darkIcon;
+let lightIconDiv = document.createElement("div")
+lightIconDiv.innerHTML = lightIcon;
+lightIconDiv.setAttribute('title', lightIconText);
+lightIconDiv.setAttribute('alt', lightIconText);
+let darkIconDiv = document.createElement("div")
+darkIconDiv.innerHTML = darkIcon;
+darkIconDiv.setAttribute('title', darkIconText);
+darkIconDiv.setAttribute('alt', darkIconText);
 
-let currentIcon = darkIconSpan;
+let currentIcon = darkIconDiv;
 let lastIcon = null;
 
 let rotateAngle = 0;
@@ -39,9 +43,9 @@ if (currentTheme == 0) {
 
 updateIcon = (theme) => {
   if (theme == 1) {
-    currentIcon = lightIconSpan;
+    currentIcon = lightIconDiv;
   } else if (theme == 0) {
-    currentIcon = darkIconSpan;
+    currentIcon = darkIconDiv;
   }
   if (lastIcon!==null && modeBtn !== lastIcon) modeBtn.removeChild(modeBtn.firstChild);
   modeBtn.appendChild(currentIcon);
@@ -74,14 +78,6 @@ modeBtn.onclick = () => {
   updateTheme();
 };
 
-// The back button for the posts page
-if (backBtn!==null) {
-  backBtn.appendChild(backIconSpan);
-  backBtn.onclick = () => {
-    document.location.href = "../index.html";
-  }
-}
-
 window.onload = () => {
   if (!doneRotation) {
     clearInterval(rotationInterval);
@@ -90,6 +86,24 @@ window.onload = () => {
     doneRotation = true;
   }
   updateTheme(window.localStorage.getItem("theme"));
+  // The back button for the posts page
+  const backBtn = document.getElementsByClassName("back");
+  
+  if (backBtn.length > 0) {
+    console.log(backBtn);
+    Array.from(backBtn).forEach(b => {
+      const backIconSpan = document.createElement("span");
+      backIconSpan.innerHTML = backIcon;
+      b.setAttribute('title', backIconText);
+      b.setAttribute('alt', backIconText);
+      b.appendChild(backIconSpan);
+      b.onclick = () => {
+        document.location.href = "..";
+      }
+      console.log(b);
+    })
+  }
+
 };
 
 updateIcon();
