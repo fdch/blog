@@ -1,5 +1,5 @@
 title: the main title of the self explanatory post about a custom made markup language
-time: 2020-01-25 11:45 | Tuesday, around noon
+time: 2020-01-25 11:45:00 | Tuesday, around noon
 
 Every time you start a new line and place some text, you start a paragraph like this one.
 
@@ -80,6 +80,6 @@ One cool thing about this is that you can include meta tags with simple syntax. 
 	⁃	`title:` anything after this becomes the main title of the post. If this title is missing, the first subtitle is taken as title.
 	⁃	`description:` Anything after this tag is the post’s meta description, which should be less than 200 characters. If this description is missing, the first paragraph is taken as such.
 	⁃	`keywords:` a list of comma-separated key words relevant to this post comes after this tag. 
-	⁃	`time:` A timestamp in the form of YYYY-MM-DD HH:MM and an optional written-out version,separated by a `|` comes after this tag. For example: `time: 2022-01-25 10:15 | Cloudy ☁️ Wednesday morning`
+	⁃	`time:` A timestamp in the form of YYYY-MM-DD HH:MM:SS and an optional written-out version,separated by a `|` comes after this tag. For example: `time: 2022-01-25 10:15:12 | Cloudy ☁️ Wednesday morning`
 
 | That's it for the syntax. I hope it's explained in detail. Head to the `parsepost.py` and skim through the `ParsePost` class to see the big, fat `parse()` method in action! Until next time 😉
