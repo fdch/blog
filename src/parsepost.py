@@ -76,10 +76,28 @@ class ParsePost(TemplatePost):
       if '`' not in s:
         element.text = s
         return element
-
-      for i in s:
-        if i == '`':
-          curr_inblock = not curr_inblock
+      
+      def element_fill(char, element=element, attr='text'):
+        """ Fill the `element` appending to the string in `element.attr` """
+        e = getattr(element, attr)
+        if e is None:
+          setattr(element, attr, '')
+        setattr(element, attr, getattr(element, attr) + char)
+      
+      for idx, char in enumerate(s):
+        prev_char = s[idx-1] if idx > 0 else None
+        nosub = sub is None
+        if char == '`':
+          # ignore escaped backtick, ie. if the previous char is a backslash
+          if prev_char and prev_char == '\\':
+            if curr_inblock:
+              element_fill(char, element=sub, attr='text')
+            elif not nosub and hasattr(sub_array[-1], 'tail'):
+              element_fill(char, element=sub_array[-1], attr='tail')
+            else:
+              element_fill(char)
+          else:
+            curr_inblock = not curr_inblock
         else:
           if prev_inblock != curr_inblock:
             sub = Element('code') if curr_inblock else sub
@@ -88,18 +106,12 @@ class ParsePost(TemplatePost):
             prev_inblock = curr_inblock
           
           if curr_inblock:
-            if sub.text is None:
-              sub.text = ''
-            sub.text += i
+            element_fill(char, element=sub)
           else:
-            if sub is None:
-              if element.text is None:
-                element.text = ''
-              element.text += i
+            if nosub:
+              element_fill(char)
             else:
-              if sub_array[-1].tail is None:
-                sub_array[-1].tail = ''
-              sub_array[-1].tail += i
+              element_fill(char, element=sub_array[-1], attr='tail')
       
       for idx,e in enumerate(sub_array[1:]):
         if idx % 2 == 0:
