@@ -44,7 +44,7 @@ class ParsePost(TemplatePost):
     p_time = re.compile(r'^time:\s+')
     p_image = re.compile(r'^image:\s+')
     p_block = re.compile(r'^\|\s+')
-    p_ulist = re.compile(r'^-\s+')
+    p_ulist = re.compile(r'^\*\s+')
     p_olist = re.compile(r'^[0-9]\.\s+')
     p_html_open = re.compile(r'^<\w+>')
     p_code = re.compile(r'^\s*```(.*)')
@@ -185,7 +185,11 @@ class ParsePost(TemplatePost):
         if not code_toggle and len(b_code):
           tag = Element('pre')
           if code_language:
-            tag.attrib.update({'language': code_language})
+            tag.attrib.update({
+              'class': 'language-'+code_language,
+              'title': code_language,
+              'data-language': code_language
+            })
           tag.text = ''.join(b_code)
           b_code = []
           self.post.append(tag)
@@ -196,7 +200,7 @@ class ParsePost(TemplatePost):
         continue
       
       # The raw html input ( not checked for validity )
-      if is_html and (html_tag is not None):
+      if is_html and (html_tag is not None) and not code_toggle:
         if re.match(rf".*</{html_tag}>", s):
           is_html = False
           b_html.append(s)

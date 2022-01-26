@@ -25,9 +25,9 @@ image: ../images/15CB060D-002D-451A-AB8A-2FC04EBBEE90.jpeg | This is the caption
 
 subtitle: this is a subtitle
 
-- this is an unordered list
-- with items
-- many items: the last one [has a link](.)
+* this is an unordered list
+* with items
+* many items: the last one [has a link](.)
 
 some paragraph and then, a blockquote
 
