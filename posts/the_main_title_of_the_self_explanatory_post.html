@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width initial-scale=1">
+    <meta name="author" content="Fede Camara Halac">
+    <meta name="description" content="This is a blog where I post various thoughts, things I've learnt, and random ideas.">
+    <meta name="keywords" content="programming,journal,blogging,composition">
+    <link rel="stylesheet" href="../css/main.css">
+    <title>the main title of the self explanatory post about a custom made markup language</title>
+  </head>
+  <body>
+    <nav>
+        <button class="back"></button>
+        <button class="mode"></button>
+      </nav>
+    <main class="single-article">
+      <header>
+        <time datetime="2022-01-25 12:58:00">Wednesday, around noon</time>
+        <h1>the main title of the self explanatory post about a custom made markup language</h1>
+      </header>
+      <p>Every time you start a new line and place some text, you start a paragraph like this one.</p>
+      <blockquote>If the line is preceded by <code>|</code> , then it becomes an indented block, like this one.</blockquote>
+      <p>You can add ordered or unordered lists, like in markdown, minus the sub items. Here is an ordered list, starting with numbers followed by a dot:</p>
+      <ol>
+        <li>First</li>
+        <li>Second</li>
+        <li>Third</li>
+      </ol>
+      <p>And here is an unordered list, starting with the star character <code>*</code> :</p>
+      <ul>
+        <li>some element</li>
+        <li>Another element</li>
+        <li>Yet another one</li>
+      </ul>
+      <h2>This is a subtitle</h2>
+      <p>To write a subtitle, all you need is to start the line with <code>subtitle:</code>  and begin your subtitle. Only subtitles are allowed, ie. no subsubtitles.</p>
+      <h2>writing code</h2>
+      <p>Code blocks or inline code snippets work just like in markdown. For inline code, you surround it with a backtick  \` , and for code blocks you place an opening and closing set of triple \` in new lines.</p>
+      <h2>images</h2>
+      <blockquote>Optionally, on code blocks you can specify the code language on the opening tag, but I have yet to include a code styler with neat syntax highlighting.</blockquote>
+      <p>To include images, you can use the <code>image: url | caption | title</code>  tag. You must include any url. After the url, you can include an optional caption, and an optional title, separating those with the <code>|</code>  character. Here’s an example:</p>
+      <figure>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/75/The_Skating_Minister.jpg/634px-The_Skating_Minister.jpg" alt="The Skating Minister" title="The Skating Minister">
+        <figcaption>This is Wikipedia’s picture of the day: The Reverend Robert Walker Skating on Duddingston Loch, better known as The Skating Minister (1790s), by Henry Raeburn</figcaption>
+      </figure>
+      <h2>plain HTML input</h2>
+      <p>Some Markdown interpreters allow for HTML input. However, these tend to be limited to a subset of the language. For this reason, and because I am using such fancy tags as <code>details</code>  and <code>summary</code> , I included HTML elements within the parsing. There is no validation, though, so if it goes wrong, it’s up to the <code>ElementTree.fromstring()</code>  method to figure out. I’m not accountable for such sorcery.</p>
+      <blockquote>Actually, the script will fail and there’s just no way to catch that now... that is, besides checking the Github workflow log for errors.</blockquote>
+      <p>In any case, here’s an example of a small article:</p>
+      <pre class="language-html" title="html" data-language="html">&lt;article&gt;
+&lt;header&gt;
+&lt;h3&gt;my title&lt;/h3&gt;
+&lt;/header&gt;
+&lt;p&gt;A paragraph&lt;/p&gt;
+&lt;details&gt;
+&lt;summary&gt;more&lt;/summary&gt;
+Here’s that hidden details I like so much… hah&lt;/details&lt;/details&gt;
+&lt;/article&gt;
+</pre>
+      <p>The above looks like this:</p>
+      <article>
+        <header>
+          <h3>my title</h3>
+        </header>
+        <p>A paragraph</p>
+        <details>
+          <summary>more</summary>
+Here’s that hidden details I like so much… hah</details>
+      </article>
+      <h2>comments!</h2>
+      <!-- You won't see this, but I added a comment here :)
+-->
+      <p>Markdown has no comments but I included a comment feature, following JS and C (inline) comments. Thus, lines beginning with <code>//</code>  are converted to HTML comments.</p>
+      <!-- Here's another comment. Nothing too fancy, though. 
+-->
+      <blockquote>PS: There's a comment in this section of the post, go to the html file to see it rendered, or to the <code>.txt</code>  file to read it.</blockquote>
+      <h2>meta description tags</h2>
+      <p>One cool thing about this is that you can include meta tags with simple syntax. These are:</p>
+      <h3>title</h3>
+      <p>Anything after <code>title:</code>  becomes the main title of the post. If this title is missing, the first subtitle is taken as title.</p>
+      <h3>description</h3>
+      <p>Anything after <code>description:</code>  is the post’s meta description, which should be less than 200 characters. If this description is missing, the first paragraph is taken as such.</p>
+      <h3>keywords</h3>
+      <p>A list of comma-separated key words relevant to this post comes after <code>keywords:</code> .</p>
+      <h3>time</h3>
+      <p>A timestamp in the form of YYYY-MM-DD HH:MM:SS and an optional written-out version,separated by a <code>|</code>  comes after <code>time:</code> .</p>
+      <p>For example: <code>time: 2022-01-25 10:15:12 | Cloudy ☁️ Wednesday morning</code>
+      </p>
+    </main>
+    <footer>
+      <time datetime="2022-01-25 12:58:00">Published on 2022-01-25 12:58:00</time>
+      <address>
+        <p>If you'd like to contact me, email me at: <a href="mailto:fdch@nyu.edu">fdch@nyu.edu</a>
+        </p>
+      </address>
+      <nav>
+        <button class="back"></button>
+        <button class="mode"></button>
+      </nav>
+    </footer>
+    <script src="../js/ui.js" charset="utf-8"></script>
+  </body>
+</html>
