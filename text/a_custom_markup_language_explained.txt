@@ -8,9 +8,9 @@ subtitle: Post Factory: Enter Google Sheets… and a lot of copy-pasting
 
 I’m not sure why, but I tend to use Sheets for everything. That’s a bug or a feature, your call; I just overdo it sometimes. In several occasions, Sheets is the way to go; most often the case is quite the opposite. Anyhow, I came up with a plausible solution:
 
-	1.	A column of HTML elements: “p”
-	2.	B column of input text: “My paragraph…”
-	3.	C column that would grab the tag from A and fill it with text from B into a nicely formatted HTML element, alla:
+1. A column of HTML elements: “p”
+2. B column of input text: “My paragraph…”
+3. C column that would grab the tag from A and fill it with text from B into a nicely formatted HTML element, alla:
 
 ```html
 <p>My paragraph…</p>
