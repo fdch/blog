@@ -4,6 +4,7 @@
 # Copyleft (c) 2022, Fede Camara Halac.
 # Distributed under the terms of the GNU General Public License
 # -----------------------------------------------------------------------------
+from html import escape as html_escape
 from .delpost import DelPost
 from .utilities import make_url, clean_emojis, expand_attributes, make_post, get_timestamp
 
@@ -99,12 +100,15 @@ class FormatPost(DelPost):
     else:
       self.copy_end(tag)
     
+    if tag == 'code':
+      self.out += ' '
+    
   def handle_data(self, data):
     
     if not self.in_main:
       return
     
-    data = str(data)
+    data = html_escape(str(data))
     
     if self.in_title:
       self.post_id = self.make_id(data)

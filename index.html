@@ -38,57 +38,6 @@
         See update_posts.py for reference
       -->
       <section id="posts">
-  <details id="a-custom-markup-lang">
-    <summary title="A custom markup language explained, or how to reinvent the wheel.">A custom markup language explained, or how to reinvent the wheel.</summary>
-    <article>
-      
-<main class="single-article">
-<header>
-<time datetime="2022:01:25 01:56">Waiting for lunch on a ☁️ Tuesday - <a href="posts/a_custom_markup_language_explained.html" title="Open in new tab" target="_top">permalink</a></time>
-<h2>A custom markup language explained, or how to reinvent the wheel.</h2></header>
-<blockquote>So, I
-<a href="./posts/example.html">made a text parser</a>but I did not really explain how it works. Here’s my attempt.</blockquote>
-<p>It all started with a need to write posts directly on my phone. Doing so in HTML proved to be quite cumbersome. Every element had to be opened, filled with text and/or attributes, and then closed. It became, besides a nuisance, quite error prone. My phone’s error correction and auto capitalization made HTML tags look really funny, and they broke most of the time. Therefore, I needed some way to input text and have the HTML elements properly set.</p>
-<h2>Post Factory: Enter Google Sheets… and a lot of copy-pasting</h2>
-<p>I’m not sure why, but I tend to use Sheets for everything. That’s a bug or a feature, your call; I just overdo it sometimes. In several occasions, Sheets is the way to go; most often the case is quite the opposite. Anyhow, I came up with a plausible solution:</p>
-<ol>
-<li>A column of HTML elements: “p”</li>
-<li>B column of input text: “My paragraph…”</li>
-<li>C column that would grab the tag from A and fill it with text from B into a nicely formatted HTML element, alla:</li></ol>
-<pre class="language-html" title="html" data-language="html"><p>My paragraph…</p></pre>
-<blockquote>Voilà! I did not stop there, though.</blockquote>
-<h2>The last cell</h2>
-<p>The Sheet grew with separate tabs for meta tags, and finally, for the complete HTML file. The last cell grabbed the text from all other cells and outputted an
-<code><html></code>root element with the content of the entire post. Thus, I had a created template factory for blog posts, entirely with Google Sheets and string concatenation. Fancy stuff.</p>
-<blockquote>…well, not so fancy.</blockquote>
-<h2>copy pasting hell</h2>
-<p>This involved copying and pasting so much text, so many times, across apps on my phone, that it was unsustainable. After four or five posts I was done with it. I wanted a better way.</p>
-<h2>Formatting problems</h2>
-<p>Another problem was the formatting. The resultant markup was a single line of a text file. Completely impractical for editing.</p>
-<blockquote>To solve this, I added some new lines within the cell text parsing (in Sheets that is called CHAR(10) or CHAR(13)), only to find that these reconfigured how Sheets formatted the cells: it introduced nasty surrounding quotes! Ugh, what a pain for the unhappy copy-paster.</blockquote>
-<h2>A new hope: 🐍</h2>
-<p>I thought of a new way to make posts. I would use Markdown, a hip, simple, and modern text markup language with many available editors for iOS. With minimal code, text is very nicely set on the page and many languages have parsing libraries for it.</p>
-<blockquote>Python has many markdown libs, so I could make a python script that parses a
-<code>.md</code>file into an
-<code>.html</code>file and place it inside the
-<code>posts</code>directory before the
-<code>update_posts.py</code>scripts updates the landing page. I was getting excited by the minute</blockquote>
-<h2>I did not want to use pip in the github workflow 🤷🏽‍♂️</h2>
-<p>In order to get any markdown library into my python version on the ubuntu shell up accessed by the Github Actions workflow, I needed to run
-<code>pip install markdown</code>or similar before running the process. Or, better yet, I needed to make a virtual environment for python and activate it before running python. Ugh, I did not want to do any of that.</p>
-<blockquote>If my experience with Pure Data has anything to add here, it would be that vanilla is usually the way to go.</blockquote>
-<p>Therefore, I just went ahead and decided to parse the text myself using only the standard (vanilla) python. That is, only using what comes with python version >= 3.9. Why not?!</p>
-<h2>I started writing a post with made-up tags and I would sort it out later.</h2>
-<p>I have no other way of making up a parser like this. I am not a pure-bred programmer, and I am not a language expert, so I cannot start thinking in terms of meta-language descriptors, or formal grammar, etc. Besides, this was a simple markup. And, I needed to KISS (keep it simple, stupid) 🙃 So, I started making it up as I went.</p>
-<blockquote>Funny thing, while writing this post I realized that I did not include hyperlinks. HYPERLINKS! The Internet gods forgive me 🤦🏻‍♂️. I hope to include them before writing this post. If that worked, I should be able to
-<a href="https://en.m.wikipedia.org/wiki/Hyperlink">understand what hyperlinks are</a>, finally 🤓.</blockquote>
-<h2>The result</h2>
-<p>
-<a href="https://fdch.github.io/blog/posts/the_main_title_of_the_self_explanatory_post.html">Here</a>is a self explanatory post about it.</p>
-<blockquote>Hope it’s useful for someone (besides me) 😋</blockquote>
-    </article>
-  </details>
-   
   <details id="the-main-title-of-th">
     <summary title="the main title of the self explanatory post about a custom made markup language">the main title of the self explanatory post about a custom made markup language</summary>
     <article>
@@ -99,47 +48,47 @@
 <h2>the main title of the self explanatory post about a custom made markup language</h2></header>
 <p>Every time you start a new line and place some text, you start a paragraph like this one.</p>
 <blockquote>If the line is preceded by
-<code>|</code>, then it becomes an indented block, like this one.</blockquote>
+<code>|</code> , then it becomes an indented block, like this one.</blockquote>
 <p>You can add ordered or unordered lists, like in markdown, minus the sub items. Here is an ordered list, starting with numbers followed by a dot:</p>
 <ol>
 <li>First</li>
 <li>Second</li>
 <li>Third</li></ol>
 <p>And here is an unordered list, starting with the star character
-<code>*</code>:</p>
+<code>*</code> :</p>
 <ul>
 <li>some element</li>
 <li>Another element</li>
 <li>Yet another one</li></ul>
 <h2>This is a subtitle</h2>
 <p>To write a subtitle, all you need is to start the line with
-<code>subtitle:</code>and begin your subtitle. Only subtitles are allowed, ie. no subsubtitles.</p>
+<code>subtitle:</code> and begin your subtitle. Only subtitles are allowed, ie. no subsubtitles.</p>
 <h2>writing code</h2>
 <p>Code blocks or inline code snippets work just like in markdown. For inline code, you surround it with a backtick  \` , and for code blocks you place an opening and closing set of triple \` in new lines.</p>
 <h2>images</h2>
 <blockquote>Optionally, on code blocks you can specify the code language on the opening tag, but I have yet to include a code styler with neat syntax highlighting.</blockquote>
 <p>To include images, you can use the
-<code>image: url | caption | title</code>tag. You must include any url. After the url, you can include an optional caption, and an optional title, separating those with the
-<code>|</code>character. Here’s an example:</p>
+<code>image: url | caption | title</code> tag. You must include any url. After the url, you can include an optional caption, and an optional title, separating those with the
+<code>|</code> character. Here’s an example:</p>
 <figure>
 <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/75/The_Skating_Minister.jpg/634px-The_Skating_Minister.jpg" alt="The Skating Minister" title="The Skating Minister">
 <figcaption>This is Wikipedia’s picture of the day: The Reverend Robert Walker Skating on Duddingston Loch, better known as The Skating Minister (1790s), by Henry Raeburn</figcaption></figure>
 <h2>plain HTML input</h2>
 <p>Some Markdown interpreters allow for HTML input. However, these tend to be limited to a subset of the language. For this reason, and because I am using such fancy tags as
-<code>details</code>and
-<code>summary</code>, I included HTML elements within the parsing. There is no validation, though, so if it goes wrong, it’s up to the
-<code>ElementTree.fromstring()</code>method to figure out. I’m not accountable for such sorcery.</p>
+<code>details</code> and
+<code>summary</code> , I included HTML elements within the parsing. There is no validation, though, so if it goes wrong, it’s up to the
+<code>ElementTree.fromstring()</code> method to figure out. I’m not accountable for such sorcery.</p>
 <blockquote>Actually, the script will fail and there’s just no way to catch that now... that is, besides checking the Github workflow log for errors.</blockquote>
 <p>In any case, here’s an example of a small article:</p>
-<pre class="language-html" title="html" data-language="html"><article>
-<header>
-<h3>my title</h3>
-</header>
-<p>A paragraph</p>
-<details>
-<summary>more</summary>
-Here’s that hidden details I like so much… hah</details</details>
-</article></pre>
+<pre class="language-html" title="html" data-language="html">&lt;article&gt;
+&lt;header&gt;
+&lt;h3&gt;my title&lt;/h3&gt;
+&lt;/header&gt;
+&lt;p&gt;A paragraph&lt;/p&gt;
+&lt;details&gt;
+&lt;summary&gt;more&lt;/summary&gt;
+Here’s that hidden details I like so much… hah&lt;/details&lt;/details&gt;
+&lt;/article&gt;</pre>
 <p>The above looks like this:</p>
 <article>
 <header>
@@ -150,27 +99,78 @@ Here’s that hidden details I like so much… hah</details</details>
 <h2>comments!</h2><!-- You won't see this, but I added a comment here :)
 -->
 <p>Markdown has no comments but I included a comment feature, following JS and C (inline) comments. Thus, lines beginning with
-<code>//</code>are converted to HTML comments.</p><!-- Here's another comment. Nothing too fancy, though. 
+<code>//</code> are converted to HTML comments.</p><!-- Here's another comment. Nothing too fancy, though. 
 -->
-<blockquote>PS: There's a comment in this section of the post, go to the html file to see it rendered, or to the
-<code>.txt</code>file to read it.</blockquote>
+<blockquote>PS: There&#x27;s a comment in this section of the post, go to the html file to see it rendered, or to the
+<code>.txt</code> file to read it.</blockquote>
 <h2>meta description tags</h2>
 <p>One cool thing about this is that you can include meta tags with simple syntax. These are:</p>
 <h3>title</h3>
 <p>Anything after
-<code>title:</code>becomes the main title of the post. If this title is missing, the first subtitle is taken as title.</p>
+<code>title:</code> becomes the main title of the post. If this title is missing, the first subtitle is taken as title.</p>
 <h3>description</h3>
 <p>Anything after
-<code>description:</code>is the post’s meta description, which should be less than 200 characters. If this description is missing, the first paragraph is taken as such.</p>
+<code>description:</code> is the post’s meta description, which should be less than 200 characters. If this description is missing, the first paragraph is taken as such.</p>
 <h3>keywords</h3>
 <p>A list of comma-separated key words relevant to this post comes after
-<code>keywords:</code>.</p>
+<code>keywords:</code> .</p>
 <h3>time</h3>
 <p>A timestamp in the form of YYYY-MM-DD HH:MM:SS and an optional written-out version,separated by a
-<code>|</code>comes after
-<code>time:</code>.</p>
+<code>|</code> comes after
+<code>time:</code> .</p>
 <p>For example:
-<code>time: 2022-01-25 10:15:12 | Cloudy ☁️ Wednesday morning</code></p>
+<code>time: 2022-01-25 10:15:12 | Cloudy ☁️ Wednesday morning</code> </p>
+    </article>
+  </details>
+   
+  <details id="a-custom-markup-lang">
+    <summary title="A custom markup language explained, or how to reinvent the wheel.">A custom markup language explained, or how to reinvent the wheel.</summary>
+    <article>
+      
+<main class="single-article">
+<header>
+<time datetime="2022-01-25 01:56">Waiting for lunch on a ☁️ Tuesday - <a href="posts/a_custom_markup_language_explained.html" title="Open in new tab" target="_top">permalink</a></time>
+<h2>A custom markup language explained, or how to reinvent the wheel.</h2></header>
+<blockquote>So, I
+<a href="./posts/example.html">made a text parser</a>but I did not really explain how it works. Here’s my attempt.</blockquote>
+<p>It all started with a need to write posts directly on my phone. Doing so in HTML proved to be quite cumbersome. Every element had to be opened, filled with text and/or attributes, and then closed. It became, besides a nuisance, quite error prone. My phone’s error correction and auto capitalization made HTML tags look really funny, and they broke most of the time. Therefore, I needed some way to input text and have the HTML elements properly set.</p>
+<h2>Post Factory: Enter Google Sheets… and a lot of copy-pasting</h2>
+<p>I’m not sure why, but I tend to use Sheets for everything. That’s a bug or a feature, your call; I just overdo it sometimes. In several occasions, Sheets is the way to go; most often the case is quite the opposite. Anyhow, I came up with a plausible solution:</p>
+<ol>
+<li>A column of HTML elements: “p”</li>
+<li>B column of input text: “My paragraph…”</li>
+<li>C column that would grab the tag from A and fill it with text from B into a nicely formatted HTML element, alla:</li></ol>
+<pre class="language-html" title="html" data-language="html">&lt;p&gt;My paragraph…&lt;/p&gt;</pre>
+<blockquote>Voilà! I did not stop there, though.</blockquote>
+<h2>The last cell</h2>
+<p>The Sheet grew with separate tabs for meta tags, and finally, for the complete HTML file. The last cell grabbed the text from all other cells and outputted an
+<code>&lt;html&gt;</code> root element with the content of the entire post. Thus, I had a created template factory for blog posts, entirely with Google Sheets and string concatenation. Fancy stuff.</p>
+<blockquote>…well, not so fancy.</blockquote>
+<h2>copy pasting hell</h2>
+<p>This involved copying and pasting so much text, so many times, across apps on my phone, that it was unsustainable. After four or five posts I was done with it. I wanted a better way.</p>
+<h2>Formatting problems</h2>
+<p>Another problem was the formatting. The resultant markup was a single line of a text file. Completely impractical for editing.</p>
+<blockquote>To solve this, I added some new lines within the cell text parsing (in Sheets that is called CHAR(10) or CHAR(13)), only to find that these reconfigured how Sheets formatted the cells: it introduced nasty surrounding quotes! Ugh, what a pain for the unhappy copy-paster.</blockquote>
+<h2>A new hope: 🐍</h2>
+<p>I thought of a new way to make posts. I would use Markdown, a hip, simple, and modern text markup language with many available editors for iOS. With minimal code, text is very nicely set on the page and many languages have parsing libraries for it.</p>
+<blockquote>Python has many markdown libs, so I could make a python script that parses a
+<code>.md</code> file into an
+<code>.html</code> file and place it inside the
+<code>posts</code> directory before the
+<code>update_posts.py</code> scripts updates the landing page. I was getting excited by the minute</blockquote>
+<h2>I did not want to use pip in the github workflow 🤷🏽‍♂️</h2>
+<p>In order to get any markdown library into my python version on the ubuntu shell up accessed by the Github Actions workflow, I needed to run
+<code>pip install markdown</code> or similar before running the process. Or, better yet, I needed to make a virtual environment for python and activate it before running python. Ugh, I did not want to do any of that.</p>
+<blockquote>If my experience with Pure Data has anything to add here, it would be that vanilla is usually the way to go.</blockquote>
+<p>Therefore, I just went ahead and decided to parse the text myself using only the standard (vanilla) python. That is, only using what comes with python version &gt;= 3.9. Why not?!</p>
+<h2>I started writing a post with made-up tags and I would sort it out later.</h2>
+<p>I have no other way of making up a parser like this. I am not a pure-bred programmer, and I am not a language expert, so I cannot start thinking in terms of meta-language descriptors, or formal grammar, etc. Besides, this was a simple markup. And, I needed to KISS (keep it simple, stupid) 🙃 So, I started making it up as I went.</p>
+<blockquote>Funny thing, while writing this post I realized that I did not include hyperlinks. HYPERLINKS! The Internet gods forgive me 🤦🏻‍♂️. I hope to include them before writing this post. If that worked, I should be able to
+<a href="https://en.m.wikipedia.org/wiki/Hyperlink">understand what hyperlinks are</a>, finally 🤓.</blockquote>
+<h2>The result</h2>
+<p>
+<a href="https://fdch.github.io/blog/posts/the_main_title_of_the_self_explanatory_post.html">Here</a>is a self explanatory post about it.</p>
+<blockquote>Hope it’s useful for someone (besides me) 😋</blockquote>
     </article>
   </details>
    
@@ -183,11 +183,11 @@ Here’s that hidden details I like so much… hah</details</details>
 <time datetime="2022-01-22 11:55:01">A sunny Sunday afternoon - <a href="posts/example.html" title="Open in new tab" target="_top">permalink</a></time>
 <h2>I made a text parser to make easier posts 😇</h2></header><!-- This is a comment. Markdown has no comments ;)
 -->
-<p>It's similar to
+<p>It&#x27;s similar to
 <a href="https://en.wikipedia.org/wiki/Markdown">markdown</a>, but slightly different.</p>
 <h2>This is my first subtitle</h2>
 <blockquote>And this is a block quote text, pretty
-<code>cool</code>, eh?</blockquote>
+<code>cool</code> , eh?</blockquote>
 <details>
 <summary>Testing</summary>Some
 <b>stuff</b>...</details>
@@ -209,7 +209,7 @@ Here’s that hidden details I like so much… hah</details</details>
 <p>This is a paragraph coming straignt 
 from html stuff</p>
 <pre class="language-js" title="js" data-language="js">// this is a js comment
-() => window.alert("ok, this is cool");</pre>
+() =&gt; window.alert(&quot;ok, this is cool&quot;);</pre>
 <ol>
 <li>this is an ordered list</li>
 <li>The second one being a link
@@ -217,10 +217,10 @@ from html stuff</p>
 <li>and, yes, I said three</li></ol>
 <blockquote>final notes, thank you for reading. 😁</blockquote>
 <p>The text
-<code>first node</code>, first code's tail
-<code>second node</code>second node's tail.
+<code>first node</code> , first code&#x27;s tail
+<code>second node</code> second node&#x27;s tail.
  Also, we can have a
-<code>third code element</code>with another tail...</p>
+<code>third code element</code> with another tail...</p>
     </article>
   </details>
    
@@ -231,22 +231,22 @@ from html stuff</p>
 <main class="single-article">
 <time title="2022-01-21 06:48:35" datetime="2022-01-21 06:48:35">Ah, this was a crazy Thursday night... - <a href="posts/i_started_a_database_part_1.html" title="Open in new tab" target="_top">permalink</a></time>
 <h2>I started a database 💽 of everything I do 👽 (Part 1)</h2>
-<blockquote>This is one of those things that you end up regretting. I don't recommend it but it was fun.</blockquote>
-<h3>It all began with a doctor's appointment and an early stage hypertension diagnosis.</h3>
+<blockquote>This is one of those things that you end up regretting. I don&#x27;t recommend it but it was fun.</blockquote>
+<h3>It all began with a doctor&#x27;s appointment and an early stage hypertension diagnosis.</h3>
 <p>Probably, all those ibuprofen I took over the years, or simply genetics, some sort of mild covid aftermath (though I never tested positive). Who knows. Anyhow, doctor said:
 <q>exercise, and do not eat salt</q>. Cool, I can do that: started swimming. Then, I just needed to avoid salt (and get a blood pressure monitor). Actually, I need to avoid any food with sodium in it. The problem is that they (ie, food corps) add sodium to pretty much anything: bottled water has sodium, store bought bread has sodium, etc.</p>
-<h3>There's a whole alter universe of reduced sodium out there.</h3>
+<h3>There&#x27;s a whole alter universe of reduced sodium out there.</h3>
 <p>But, living in Argentina did not make cutting down sodium easy. That is, it is already very hard to be a vegetarian in this so notorious a country for its meat intake and machismo, let alone expect any easy-to-read tag that says:
-<q>yo, you can it this,  there's no sodium in it, all is good 👍🏼</q>. Reducing sodium proved herein to be a harder task. That aside, food does taste a lot better here than in the US, IMHO.</p>
-<p>Hypertension is not only triggered by salt intake. Multiple factors weigh in on the overall tension curve, which is always oscillating. Stress 😓 is one of those factors: having better resources to handling stress definitely helps with high blood pressure. Exercise 🏊‍♂️ weighs in as a tension regulator, somehow, that is why it is recommended to do so. Anyway, with sodium, we have now three parameters to monitor 🎚 the context of our blood pressure habits. There are endless parameters, however, endless variables on this infinite database contingency that we call life. And I'm only talking about my own life, that is, everything I do in a day.</p>
-<p>Do I keep track of how many breaths I take? Sting, I don't! 🐒 Do I know how many milliliters of water I have drank? I might be able to approach that number 🤔 How many popcorns you ate during the film? Well…🍿  Or, how much you sweat? Got me 🤷🏽‍♂️. In other words, the organicity of our body is uncountable, it is malleable, and it is embedded within an inseparable contextual nature that extends universally from the quantum realm to the nearest black hole, and most likely, beyond. 🪐</p>
+<q>yo, you can it this,  there&#x27;s no sodium in it, all is good 👍🏼</q>. Reducing sodium proved herein to be a harder task. That aside, food does taste a lot better here than in the US, IMHO.</p>
+<p>Hypertension is not only triggered by salt intake. Multiple factors weigh in on the overall tension curve, which is always oscillating. Stress 😓 is one of those factors: having better resources to handling stress definitely helps with high blood pressure. Exercise 🏊‍♂️ weighs in as a tension regulator, somehow, that is why it is recommended to do so. Anyway, with sodium, we have now three parameters to monitor 🎚 the context of our blood pressure habits. There are endless parameters, however, endless variables on this infinite database contingency that we call life. And I&#x27;m only talking about my own life, that is, everything I do in a day.</p>
+<p>Do I keep track of how many breaths I take? Sting, I don&#x27;t! 🐒 Do I know how many milliliters of water I have drank? I might be able to approach that number 🤔 How many popcorns you ate during the film? Well…🍿  Or, how much you sweat? Got me 🤷🏽‍♂️. In other words, the organicity of our body is uncountable, it is malleable, and it is embedded within an inseparable contextual nature that extends universally from the quantum realm to the nearest black hole, and most likely, beyond. 🪐</p>
 <h3>I began databasing myself</h3>
 <p>My life depends on the 🌞 and the 🌙, there is just no way around that. But, I still have hypertension, and I still want to find out the extent to which the things I do and the things I digest have an effect on my blood pressure or not. Hence, I decided to put all of those elements into a database, that is, I began databasing myself.</p>
-<p>The project started as a simple logging Google Form, that changed into a more elaborate one. It's kinda cool because the first weeks have some data structure that changes into a different one, all in the same Google Sheet. A nightmare to parse, but it is historically relevant.</p>
+<p>The project started as a simple logging Google Form, that changed into a more elaborate one. It&#x27;s kinda cool because the first weeks have some data structure that changes into a different one, all in the same Google Sheet. A nightmare to parse, but it is historically relevant.</p>
 <p>Anyway, the database grew at a pace of 15-30 entries a day, and it just kept piling up as you might expect. Some routine like days were simpler; others were trickier. But, I managed to log pretty much anything. It became an obsession. And I like obsessions. To the point that I thought to myself:
-<q>there might be other obsessive people like me who would find an all encompassing logger app helpful, sure</q>. That's an idea. But, I liked it to myself. It was just a Google Form and Sheet, felt simple enough.</p>
+<q>there might be other obsessive people like me who would find an all encompassing logger app helpful, sure</q>. That&#x27;s an idea. But, I liked it to myself. It was just a Google Form and Sheet, felt simple enough.</p>
 <h3>…and then, I stopped</h3>
-<p>Three months later, I had a huge pile of data. I have not parsed it yet; haven't drawn any conclusions. I just did that 🙉🐭 database, and then, in the beginning of the year 2022, I stopped updating it. It's been over a month since my last update. I miss it. There was something raw in doing such an extreme and detailed thought work on bodily stuff. I want to parse those numbers and draw conclusions but I need to wait. For some reason, I needed to stop and think. But, I do miss punching in those numbers.</p>
+<p>Three months later, I had a huge pile of data. I have not parsed it yet; haven&#x27;t drawn any conclusions. I just did that 🙉🐭 database, and then, in the beginning of the year 2022, I stopped updating it. It&#x27;s been over a month since my last update. I miss it. There was something raw in doing such an extreme and detailed thought work on bodily stuff. I want to parse those numbers and draw conclusions but I need to wait. For some reason, I needed to stop and think. But, I do miss punching in those numbers.</p>
 <p>I wrote this post, perhaps to think better, but I did not get to any conclusion as of now and I doubt I will. I guess an apology is in order, towards you, reader. I embarked us on my journey to databasing, only to take us to where you already knew you were. My blood pressure is still high. I still exercise. I eat less salt 🧂🚫. One thing I can say, though, is that food tastes better after going salt-free for more than two months: the tongue feels different because the taste buds go that  extra mile to extract flavor out from food to my brain.</p>
 <blockquote>To be continued…</blockquote>
     </article>
@@ -263,7 +263,7 @@ from html stuff</p>
 <q>No JavaScript</q>one. We like
         JS. However, I was not going to do the whole JSON databasing shebang, fetching, caching, etc…,
 <a href="https://github.com/fdch/fdch.github.io" title="like I did before">like I did before</a>.</p>
-<blockquote>I wanted something simpler. I'd heard about Github actions, but always wanted to try. So here's what
+<blockquote>I wanted something simpler. I&#x27;d heard about Github actions, but always wanted to try. So here&#x27;s what
         I did.</blockquote>
 <h3>Tinker with a workflow</h3>
 <p>I added a posts subdirectory in which I place every post I make for this blog. From that directory, I want
@@ -280,14 +280,14 @@ from html stuff</p>
         not delve into the rawness of
 <a href="https://docs.python.org/3/library/html.parser.html" title="that html.parser">that html.parser</a>.</p>
 <p>Anyway, after a few hours and a few classes later, the
-<code>update_posts.py</code>function was finished. It boiled down to three steps:</p>
+<code>update_posts.py</code> function was finished. It boiled down to three steps:</p>
 <ol>
 <li>Grab the index file and clear the section that will include all posts</li>
 <li>For every post, grab it and run a pre-formatter, and sort them in reverse chronological order</li>
 <li>Stack the posts up on the posts section of the index file</li></ol>
 <p>The trick here was to: identify the posts sections in the index file, wrap the individual posts in their own
-<code>main</code>tag so parsing is easy, and add a
-<code>time</code>tag on each post with the timestamp for sorting.</p>
+<code>main</code> tag so parsing is easy, and add a
+<code>time</code> tag on each post with the timestamp for sorting.</p>
 <blockquote>So, that was it with step 2. It took a while to get the parsing right, but html is such a powerful
         and robust way to structure text that it makes things easy; and, Python and strings do work quite nicely
         together.</blockquote>
@@ -311,7 +311,7 @@ jobs:
           git config user.name github-actions
           git config user.email github-actions@github.com
           git add .
-          git commit -m 'Auto-Update posts'
+          git commit -m &#x27;Auto-Update posts&#x27;
           git push</pre>
 <p>The basic steps in the gist above are:
 <ol>
@@ -348,7 +348,7 @@ jobs:
 <blockquote>The sonic research of this performance is based on the sonification of the musical gesture mediated by the mobile device, emphasizing the participatory movement of the performers.</blockquote>
 <h3>The tech</h3>
 <p>The platform is based on a client-server architecture, with a server written in node.js hosted in heroku and two types of clients, one for web written in javascript and another, local, written in node.js.</p>
-<p>Here's a diagram</p>
+<p>Here&#x27;s a diagram</p>
 <figure>
 <img src="./images/66ED0BFD-BD8C-443A-97D4-ED795C7BE66F.jpeg"></img>
 <figcaption>A diagram for the client-server architecture in CollidePd</figcaption></figure>
@@ -356,7 +356,7 @@ jobs:
 <blockquote>Note that these two local clients are optional. The real activity happens online.</blockquote></p>
 <h3>The visuals</h3>
 <p>On the web page there is a visualization of the movement made with the mobile device using yet a separate client that grabs all data from players.</p>
-<blockquote>To be continued… (I'm tired and I'll go to sleep 😴)</blockquote>
+<blockquote>To be continued… (I&#x27;m tired and I&#x27;ll go to sleep 😴)</blockquote>
     </article>
   </details>
    
@@ -368,7 +368,7 @@ jobs:
 <time title="2022-01-16 1:55:35" datetime="2022-01-16 1:55:35">2022-01-16 1:55:35 - <a href="posts/i_reverse_engineered_an_analog_synth.html" title="Open in new tab" target="_top">permalink</a></time>
 <h2>I reverse engineered 🥷 an analog synth 🎛  into an open source VST 💾</h2>
 <blockquote>TL;DR: I made a VST, you can
-<a href="https://github.com/fdch/Apollo1">get it here</a>. Note: I'm not
+<a href="https://github.com/fdch/Apollo1">get it here</a>. Note: I&#x27;m not
       making any money from this, it is only intended for educational purposes.</blockquote>
 <h3>The Encounter</h3>
 <p>The evening concert was coming to an end in the countryside of a town called Unquillo, not far from
@@ -391,13 +391,13 @@ jobs:
       had to be mine.</p>
 <h3>The Revelation</h3>
 <p>A few days went by and I just forgot about Apollo. I continued with my work on
-<a href="https://github.com/fdch/pdpy">pdpy</a>, I forget what I did, and I watched a few movies. So, I'm
+<a href="https://github.com/fdch/pdpy">pdpy</a>, I forget what I did, and I watched a few movies. So, I&#x27;m
       in
       the middle of the movie 🎥, Gosling is turning and flipping around trying not to pass out while
       stabilizing
-      a ship, which will be the Eagle upon it's moon landing, and it hit me:
+      a ship, which will be the Eagle upon it&#x27;s moon landing, and it hit me:
 <cite>I will buy the synth</cite>.
-      Spinning out of control, I duck-duck-go'ed
+      Spinning out of control, I duck-duck-go&#x27;ed
 <cite>Apollo synth</cite>only to find that it was
       discontinued.
       I became frustrated for a second, just enough to glance at the screen while
@@ -411,12 +411,12 @@ jobs:
       synthesizers. From his website, it reads:</p>
 <blockquote>
 <q>GS Apollo I is an analog monophonic synthesizer featuring subtractive synthesis.</q></blockquote>
-<p>Here's
+<p>Here&#x27;s
 <a href="https://youtu.be/qBSFE7i5L88">a video of Ernesto Romeo</a>giving it a spin. Luckily,
-      subtractive synthesis is something I'd done in the past. However, I was decided to make it into a VST
+      subtractive synthesis is something I&#x27;d done in the past. However, I was decided to make it into a VST
       using Pure Data, so I had to make it suitable for
 <a href="https://github.com/pierreguillot/Camomile">Camomile</a>. From then on, this became a learning
-      project where I tackled with VST parameters and the internal logic Pierre Guillot, Camomile's awesome
+      project where I tackled with VST parameters and the internal logic Pierre Guillot, Camomile&#x27;s awesome
       coder, had intended. His docs were really helpful with that 👌🏼.</p>
 <p>In addition to learning how to Camomile, I had to get some information about how the Apollo 1 was built.
       That is, I needed some diagrams of the electric circuitry involved in it. For this, I looked into the
@@ -430,22 +430,22 @@ jobs:
 <figure>
 <img src="https://github.com/fdch/Apollo1/raw/df21eef4c01203c5fab62e048a23c918268f8d9d/Apollo1.png"></img>
 <figcaption>The Apollo VST</figcaption></figure>
-<p>The DSP design was quite straightforward, keeping it as simple as possible. The ADSR logic comes from Pd's
+<p>The DSP design was quite straightforward, keeping it as simple as possible. The ADSR logic comes from Pd&#x27;s
       doc, no extra magic there. The rest is just joining the dots. The main filter was adapted from one made by
       Cyrille Henri in 2016, and it was
 <q>based on algorythm by Vesa Valimaki and Antti Huovilaine</q>.
-<blockquote>Do check CHNRY's work:
-<a href="http://www.chnry.net/ch/">http://www.chnry.net/ch/</a>, he's
+<blockquote>Do check CHNRY&#x27;s work:
+<a href="http://www.chnry.net/ch/">http://www.chnry.net/ch/</a>, he&#x27;s
       quite amazing.</blockquote></p>
 <h3>The VST</h3>
 <p>Making the VST was quite easy because I was using Camomile, which
 <em>is</em>the VST that loads the Pd
       patch I made. The audio core of Camomile comes from the embedded version of Pd called
-<a href="https://github.com/libpd">libpd</a>. Look into that library if you're interested in knowing how it
+<a href="https://github.com/libpd">libpd</a>. Look into that library if you&#x27;re interested in knowing how it
       works. So, making the VST meant changing the patch to which the compiled Camomile VST is pointing. Thus,
       all I had to do is grab the Camomile releases and replace the patch (and some other stuff, too, read the
       docs for that).</p>
-<blockquote>That's that; no magic. Actually, it was quite magical 🧙‍♂️🎹🎛</blockquote>
+<blockquote>That&#x27;s that; no magic. Actually, it was quite magical 🧙‍♂️🎹🎛</blockquote>
     </article>
   </details>
    
@@ -460,7 +460,7 @@ jobs:
         memory has been giving me headaches as it gets more and more difficult to remember stuff that happened
         long
         ago 😣</p>
-<blockquote>about 15 years, though, I'm not that old.</blockquote>
+<blockquote>about 15 years, though, I&#x27;m not that old.</blockquote>
 <p>Added to this tendency towards oblivion, I did not know I was programming at first. I began writing basic
         HTML, single-page websites. No styling, just layout, and a few basic PHP snippets of code that I managed
         to
@@ -472,7 +472,7 @@ jobs:
 <blockquote>Skim a tutorial and copy some code to get yours working.</blockquote>And I did not know it as
 <em>code</em>, it was just a set of instructions. That could not be Programming.</p>
 <p>Needless to say, making websites was something I started doing on my own time, usually at night, while
-        getting to know the endless depths of that web word wide. That abyss, and insomnia, I'm not sure which
+        getting to know the endless depths of that web word wide. That abyss, and insomnia, I&#x27;m not sure which
         came
         first, channelled through a need to understand hypertext, or at least how to use it. The browser was my
         entry point to programming.</p>
@@ -484,7 +484,7 @@ jobs:
         development. And that was the word,
 <i>development</i>, that I was so scared of:
 <q>Noo, I am not a
-          developer. No way. I just know some HTML…</q>I had no idea what being a developer was. I still don't.</p>
+          developer. No way. I just know some HTML…</q>I had no idea what being a developer was. I still don&#x27;t.</p>
 <p>By then, I realized CSS was something you needed in order to wash out that horrible HTML. But, it was
         strange opening those curly braces, and it was even stranger to do this on a different file (with a
         different extension, 😱).</p>
@@ -526,7 +526,7 @@ jobs:
         realized then that I was taking software for granted. All my life, I did not know you could make stuff.
         So,
         he opened up a text editor, wrote some stuff in the C language, and inputted some words on a terminal
-        console. The result was astonishing: a new object, the one he'd just created, was there, ready to be
+        console. The result was astonishing: a new object, the one he&#x27;d just created, was there, ready to be
         connected to other objects. What is an object? I had no idea. I just used them. And now I would make them.
         My advisor lent me a copy of
 <cite>The C Programming Language</cite>, and I went home in awe.</p>
@@ -562,10 +562,10 @@ jobs:
 <p>You also need to enable Github Pages on it. Head to
 <a href="https://pages.github.com">https://pages.github.com/</a>to know how to do so.</p>
 <h3>Step 3: Simplify</h3>
-<blockquote>Scratch out everything you don't need</blockquote>
+<blockquote>Scratch out everything you don&#x27;t need</blockquote>
 <p>In my case, once the design was layed out, I went ahead and scratched out
       Everything that I thought unnecessary. Hence, there was a lot of stuff like:
-      Don't use (json, JavaScript, markdown, etc) and a ✅ for
+      Don&#x27;t use (json, JavaScript, markdown, etc) and a ✅ for
 <em>plain HTML</em>.</p>
 <h3>Step 4: Create an index.html file (the one you are reading now)</h3>
 <blockquote>This file is the only page you live edit, while readers view it (🤦🏽)</blockquote>
@@ -578,11 +578,11 @@ jobs:
 <i>ok, this is questionable,
 <s>sue me</s></i></p>
 <p>One thing I found out about is the
-<code>details</code>and
-<code>summary</code>HTML tags, which made
+<code>details</code> and
+<code>summary</code> HTML tags, which made
       collapsing and unfolding possible, and only using html! Fabulous. 🤷🏽‍♂️
 <details>
-<summary>Isn't it cool 🙁?</summary>😒</details></p>
+<summary>Isn&#x27;t it cool 🙁?</summary>😒</details></p>
 <h3>Step 5: Create an style.css file</h3>
 <blockquote>At his point your blog looks amazing, well done 👍🏼</blockquote>
 <p>For the style, I went with a
@@ -594,14 +594,14 @@ jobs:
       One is just a blab about what this blog is. This one is cooler, it has a picture and all.</blockquote>
 <p>I really liked the picture trick there. I just 📸, upload one to Github as a file. Then I copy the path,
       Come here, and paste it in the
-<code>src</code>field of the img tag and voilà, I'm the New York Post</p>
+<code>src</code> field of the img tag and voilà, I&#x27;m the New York Post</p>
 <figure>
 <img src="./images/8349BFF4-D311-442E-85CF-532047D3634A.jpeg"></img>
 <figcaption>This is a lighthouse in Córdoba, Argentina, a landlocked city. A useless lighthouse.</figcaption></figure>
-<blockquote>That's it! I now have a blog.
-<br>What's fun is that there is: No js ☹️, no php 🥲, no frameworks 😅;
+<blockquote>That&#x27;s it! I now have a blog.
+<br>What&#x27;s fun is that there is: No js ☹️, no php 🥲, no frameworks 😅;
       It took less than 2 hs to get it running and write this post 🤩.
-      Now it's just a matter of continuing it... 🙃</blockquote>
+      Now it&#x27;s just a matter of continuing it... 🙃</blockquote>
     </article>
   </details>
   </section>
@@ -611,7 +611,7 @@ jobs:
     <footer>
       If you'd like to contact me, please email me at fdch@nyu.edu.
       <br>
-      Last updated: <time title="2022-01-26 17:10:56.333575" datetime="2022-01-26 17:10:56.333575"> January 26, 2022, 17:10</time>
+      Last updated: <time title="2022-01-26 15:32:34.043710" datetime="2022-01-26 15:32:34.043710"> January 26, 2022, 15:32</time>
       <br>
       <a href="https://github.com/fdch/blog" title="Fork me on Github">Copyleft ©</a>
     </footer>

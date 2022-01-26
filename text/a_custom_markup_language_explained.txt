@@ -87,6 +87,6 @@ subtitle: The result
 
 
 
-time: 2022:01:25 01:56 | Waiting for lunch on a ☁️ Tuesday
+time: 2022-01-25 01:56 | Waiting for lunch on a ☁️ Tuesday
 description: A post about a custom made markup language and its parser. Thrilling news on the topic of unwanted and unnecessary reinvented wheels. 
 keywords: parsers, markup, HTML, blogging, python, xml

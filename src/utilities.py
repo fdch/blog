@@ -39,7 +39,7 @@ def get_timestamp(timestring=None, date_format='%Y-%m-%d %H:%M:%S'):
         try:
           return date('%Y-%m-%d')
         except ValueError:
-          print("Could not parse timestamp, making it up")
+          print(f"Could not parse timestamp: {timestring}... I'll make it up")
           return get_timestamp()
 
 
