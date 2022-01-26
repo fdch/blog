@@ -60,7 +60,7 @@ The above looks like this:
 <p>A paragraph</p>
 <details>
 <summary>more</summary>
-Here’s that hidden details I like so much… hah</details</details>
+Here’s that hidden details I like so much… hah</details>
 </article>
 
 subtitle: comments!
