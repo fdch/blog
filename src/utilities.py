@@ -29,7 +29,19 @@ def get_timestamp(timestring=None, date_format='%Y-%m-%d %H:%M:%S'):
   if timestring is None:
     return datetime.datetime.now()
   else:
-    return datetime.datetime.strptime(timestring, date_format)
+    date = lambda fmt: datetime.datetime.strptime(timestring, fmt)
+    try:
+      return date(date_format)
+    except ValueError:
+      try:
+        return date('%Y-%m-%d %H:%M')
+      except ValueError:
+        try:
+          return date('%Y-%m-%d')
+        except ValueError:
+          print("Could not parse timestamp, making it up")
+          return get_timestamp()
+
 
 def make_timetag(timestamp):  
   """  format date 01-14-2022 18:00:00 to timestamp """
