@@ -1,0 +1,85 @@
+title: the main title of the self explanatory post about a custom made markup language
+time: 2020-01-25 11:45 | Tuesday, around noon
+
+Every time you start a new line and place some text, you start a paragraph like this one.
+
+| If the line is preceded by `|`, then it becomes an indented block, like this one.
+
+You can add ordered or unordered lists, like in markdown, minus the sub items. Here is an ordered list, followed by an unordered one: 
+
+	1.	First
+	2.	Second
+	3.	Third
+
+	⁃	some element
+	⁃	Another element
+	⁃	Yet another one
+
+subtitle: This is a subtitle
+
+To write a subtitle, all you need is to start the line with `subtitle:` and begin your subtitle. Only subtitles are allowed, ie. no subsubtitles. 
+
+subtitle: writing code
+
+Code blocks or inline code snippets work just like in markdown. For inline code, you surround it with a backtick  \` , and for code blocks you place an opening and closing set of triple \` in new lines. 
+
+| Optionally, on code blocks you can specify the code language on the opening tag, but I have yet to include a code styler with neat syntax highlighting. 
+
+subtitle: images
+
+To include images, you can use the `image: url | caption | title` tag. You must include any url. After the url, you can include an optional caption, and an optional title, separating those with the `|` character. Here’s an example:
+
+image: https://upload.wikimedia.org/wikipedia/commons/thumb/7/75/The_Skating_Minister.jpg/634px-The_Skating_Minister.jpg  | This is Wikipedia’s picture of the day: The Reverend Robert Walker Skating on Duddingston Loch, better known as The Skating Minister (1790s), by Henry Raeburn | The Skating Minister
+
+subtitle: plain HTML input
+
+Some Markdown interpreters allow for HTML input. However, these tend to be limited to a subset of the language. For this reason, and because I am using such fancy tags as `details` and `summary`, I included HTML elements within the parsing. There is no validation, though, so if it goes wrong, it’s up to the `ElementTree.fromstring()` method to figure out. I’m not accountable for such sorcery. 
+
+| Actually, the script will fail and there’s just no way to catch that now... that is, besides checking the Github workflow log for errors. 
+
+In any case, here’s an example of a small article:
+
+```html
+<article>
+<header>
+<h3>my title</h3>
+</header>
+<p>A paragraph</p>
+<details>
+<summary>more</summary>
+Here’s that hidden details I like so much… hah</details</details>
+</article>
+```
+
+The above looks like this:
+
+<article>
+<header>
+<h3>my title</h3>
+</header>
+<p>A paragraph</p>
+<details>
+<summary>more</summary>
+Here’s that hidden details I like so much… hah</details</details>
+</article>
+
+subtitle: comments!
+
+// You won't see this, but I added a comment here :)
+
+Markdown has no comments but I included a comment feature, following JS and C (inline) comments. Thus, lines beginning with `//` are converted to HTML comments. 
+
+| PS: There's a comment in this section of the post, go to the html file to see it rendered, or to the `.txt` file to read it.
+
+// Here's another comment. Nothing too fancy, though. 
+
+subtitle: meta description tags
+
+One cool thing about this is that you can include meta tags with simple syntax. These are:
+
+	⁃	`title:` anything after this becomes the main title of the post. If this title is missing, the first subtitle is taken as title.
+	⁃	`description:` Anything after this tag is the post’s meta description, which should be less than 200 characters. If this description is missing, the first paragraph is taken as such.
+	⁃	`keywords:` a list of comma-separated key words relevant to this post comes after this tag. 
+	⁃	`time:` A timestamp in the form of YYYY-MM-DD HH:MM and an optional written-out version,separated by a `|` comes after this tag. For example: `time: 2022-01-25 10:15 | Cloudy ☁️ Wednesday morning`
+
+| That's it for the syntax. I hope it's explained in detail. Head to the `parsepost.py` and skim through the `ParsePost` class to see the big, fat `parse()` method in action! Until next time 😉
