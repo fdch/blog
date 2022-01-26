@@ -6,59 +6,85 @@ It all started with a need to write posts directly on my phone. Doing so in HTML
 
 subtitle: Post Factory: Enter Google Sheets… and a lot of copy-pasting
 
+
 I’m not sure why, but I tend to use Sheets for everything. That’s a bug or a feature, your call; I just overdo it sometimes. In several occasions, Sheets is the way to go; most often the case is quite the opposite. Anyhow, I came up with a plausible solution:
+
 
 1. A column of HTML elements: “p”
 2. B column of input text: “My paragraph…”
 3. C column that would grab the tag from A and fill it with text from B into a nicely formatted HTML element, alla:
 
+
 ```html
 <p>My paragraph…</p>
 ```
 
+
 | Voilà! I did not stop there, though. 
+
 
 subtitle: The last cell
 
+
 The Sheet grew with separate tabs for meta tags, and finally, for the complete HTML file. The last cell grabbed the text from all other cells and outputted an `<html>` root element with the content of the entire post. Thus, I had a created template factory for blog posts, entirely with Google Sheets and string concatenation. Fancy stuff.
+
 
 | …well, not so fancy.
 
+
 subtitle: copy pasting hell
+
 
 This involved copying and pasting so much text, so many times, across apps on my phone, that it was unsustainable. After four or five posts I was done with it. I wanted a better way. 
 
+
 subtitle: Formatting problems
+
 
 Another problem was the formatting. The resultant markup was a single line of a text file. Completely impractical for editing. 
 
+
 | To solve this, I added some new lines within the cell text parsing (in Sheets that is called CHAR(10) or CHAR(13)), only to find that these reconfigured how Sheets formatted the cells: it introduced nasty surrounding quotes! Ugh, what a pain for the unhappy copy-paster.
+
 
 subtitle: A new hope: 🐍 
 
+
 I thought of a new way to make posts. I would use Markdown, a hip, simple, and modern text markup language with many available editors for iOS. With minimal code, text is very nicely set on the page and many languages have parsing libraries for it. 
+
 
 | Python has many markdown libs, so I could make a python script that parses a `.md` file into an `.html` file and place it inside the `posts` directory before the `update_posts.py` scripts updates the landing page. I was getting excited by the minute
 
+
 subtitle: I did not want to use pip in the github workflow 🤷🏽‍♂️
+
 
 In order to get any markdown library into my python version on the ubuntu shell up accessed by the Github Actions workflow, I needed to run `pip install markdown` or similar before running the process. Or, better yet, I needed to make a virtual environment for python and activate it before running python. Ugh, I did not want to do any of that. 
 
+
 | If my experience with Pure Data has anything to add here, it would be that vanilla is usually the way to go. 
+
 
 Therefore, I just went ahead and decided to parse the text myself using only the standard (vanilla) python. That is, only using what comes with python version >= 3.9. Why not?! 
 
+
 subtitle: I started writing a post with made-up tags and I would sort it out later. 
+
 
 I have no other way of making up a parser like this. I am not a pure-bred programmer, and I am not a language expert, so I cannot start thinking in terms of meta-language descriptors, or formal grammar, etc. Besides, this was a simple markup. And, I needed to KISS (keep it simple, stupid) 🙃 So, I started making it up as I went. 
 
+
 | Funny thing, while writing this post I realized that I did not include hyperlinks. HYPERLINKS! The Internet gods forgive me 🤦🏻‍♂️. I hope to include them before writing this post. If that worked, I should be able to [understand what hyperlinks are](https://en.m.wikipedia.org/wiki/Hyperlink), finally 🤓.
+
 
 subtitle: The result
 
+
 [Here](https://fdch.github.io/blog/posts/the_main_title_of_the_self_explanatory_post.html) is a self explanatory post about it. 
 
+
 | Hope it’s useful for someone (besides me) 😋
+
 
 
 time: 2022:01:25 01:56 | Waiting for lunch on a ☁️ Tuesday
