@@ -81,7 +81,7 @@ class ParsePost(TemplatePost):
         """ Fill the `element` appending to the string in `element.attr` """
         e = getattr(element, attr)
         if e is None:
-          setattr(element, attr, '')
+          setattr(element, attr, '' if 'text' in attr else ' ')
         setattr(element, attr, getattr(element, attr) + char)
       
       for idx, char in enumerate(s):
@@ -146,7 +146,7 @@ class ParsePost(TemplatePost):
           a = Element('a')
           a.attrib.update({'href': url or ''})
           a.text = text or url or ''
-          a.tail = post or ''
+          a.tail = ' ' + post or ''
           element.append(a)
         
         make_link(element, m.group('url'), m.group('text'), m.group('post'))
