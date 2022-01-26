@@ -1,4 +1,22 @@
 
+body {
+  font-size: 1.5em;
+  line-height: 1.3em;
+  --text-color: #222;
+  --bkg-color: #fff;
+  --anchor-color: #0000ff;
+}
+
+body.dark-theme {
+  --text-color: #eee;
+  --bkg-color: #121212;
+  --anchor-color: #cca43b;
+}
+
+header {
+  line-height:2em;
+}
+
 main time {
   font-size: 0.75em;
 }
@@ -17,19 +35,6 @@ summary:hover {
 
 details[open] summary {
   border:none
-}
-
-body {
-  font-size: 1.5em;
-  --text-color: #222;
-  --bkg-color: #fff;
-  --anchor-color: #0000ff;
-}
-
-body.dark-theme {
-  --text-color: #eee;
-  --bkg-color: #121212;
-  --anchor-color: #cca43b;
 }
 
 
@@ -138,6 +143,7 @@ pre, code {
   color:#eee;
 }
 pre {
+  line-height:1.3em;
   max-width:600px;
   overflow-x:scroll;
   white-space: pre-wrap;
